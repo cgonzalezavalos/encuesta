@@ -34,17 +34,22 @@ st.markdown(
 st.markdown("<hr>", unsafe_allow_html=True)
 
 #--------------------------------------------------------------------------
-df=pd.read_excel('BBDD Todos_rev.xlsx')
+@st.cache_data
+def datos_encuesta():
+    df=pd.read_excel('BBDD Todos_rev.xlsx')
+    mt_indices=pd.read_excel('Maestros.xlsx',sheet_name='indices')
+    mt_servicios=pd.read_excel('Maestros.xlsx',sheet_name='servicios')
 
-mt_indices=pd.read_excel('Maestros.xlsx',sheet_name='indices')
-mt_servicios=pd.read_excel('Maestros.xlsx',sheet_name='servicios')
+    df=pd.merge(df,mt_indices,how='left',on='Indice')
+    df=pd.merge(df,mt_servicios,how='left',on='Servicio')
+    return df
 
-df=pd.merge(df,mt_indices,how='left',on='Indice')
-df=pd.merge(df,mt_servicios,how='left',on='Servicio')
+
+df_encuesta=datos_encuesta()
 
 #-------------------------------------------------------------------------
 # data frame con resumen de indicadores
-df_resumen_indicaores=df.query("`Servicio`=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'") #`Indice` == 'Satisfaccion Laboral' & 
+df_resumen_indicaores=df_encuesta.query("`Servicio`=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'") #`Indice` == 'Satisfaccion Laboral' & 
 
 #-------------------------------------------------------------------------
 # Definir un diccionario de colores para las categorías
