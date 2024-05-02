@@ -52,6 +52,12 @@ categoria_colors = {
     'Minimo': 'orange',
     'Maximo': 'blue'
 }
+
+dimension_colors ={
+    'Actitudes Laborales': '#57AADE',
+    'Prácticas de Gestión de Personas': '#DE5757'
+}
+
 #--------------------------------------------------------------------------
 # configuración gráficos
 visible_y_axis=False
@@ -61,7 +67,7 @@ visible_y_axis=False
 
 #-------------------------------------------------------------------------
 # gráfico Convocatorias por Año
-graf1=px.bar(df_resumen_indicaores,x='Indice',y='Resultado',title='<b>Resultados por Indices</b>',color_discrete_sequence=[categoria_colors]).\
+graf1=px.bar(df_resumen_indicaores,x='Indice',y='Resultado',title='<b>Resultados por Indices</b>',color_discrete_sequence=[dimension_colors]).\
             update_yaxes(visible=visible_y_axis,title_text=None).\
                 update_xaxes(title_text=None)
 graf1.update_layout(yaxis_tickformat='.0f')
