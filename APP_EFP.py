@@ -47,4 +47,23 @@ df=pd.merge(df,mt_servicios,how='left',on='Servicio')
 df_resumen_indicaores=df.query("`Servicio`=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'") #`Indice` == 'Satisfaccion Laboral' & 
 
 #-------------------------------------------------------------------------
-st.dataframe(df_resumen_indicaores)
+# Definir un diccionario de colores para las categorías
+categoria_colors = {
+    'Minimo': 'orange',
+    'Maximo': 'blue'
+}
+#--------------------------------------------------------------------------
+# configuración gráficos
+visible_y_axis=False
+#--------------------------------------------------------------------------
+#st.dataframe(df_resumen_indicaores)
+
+
+#-------------------------------------------------------------------------
+# gráfico Convocatorias por Año
+graf1=px.bar(df_resumen_indicaores,x='Indice',y='Resultado',title='<b>Resultados por Indices</b>',color_discrete_sequence=[categoria_colors]).\
+            update_yaxes(visible=visible_y_axis,title_text=None).\
+                update_xaxes(title_text=None)
+graf1.update_layout(yaxis_tickformat='.0f')
+
+st.plotly_chart(graf1)
