@@ -164,7 +164,8 @@ else:
 # gráfico general de resultados por indices
 graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>').update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
-graf1.update_layout(yaxis_tickformat='.0f')
+graf1.update_layout(yaxis_tickformat='.0f',width=1000,  # Ancho del gráfico en píxeles
+    height=800,)
 
 #------------------------------------------------------------------------
 # Definir un diccionario de colores para las categorías
@@ -216,7 +217,7 @@ graf2.update_layout(
     title='',
     showlegend=True,
     barmode='group',
-    bargap=0.15,
+    bargap=1,#0.15,
     bargroupgap=0.1,
     width=1800,  # Ancho del gráfico en píxeles
     height=1300,  # Altura del gráfico en píxeles
@@ -227,7 +228,7 @@ for index, row in df_max_min.iterrows():
     graf2.add_annotation(
         x=row['Resultado'], y=row['Indice'], text=row['Servicio'],
         font=dict(size=14, color=categoria_colors[row['Categoria']]),
-        showarrow=True,
+        showarrow=False,
         xshift=300,
     )
 
