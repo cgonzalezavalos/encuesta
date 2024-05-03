@@ -176,33 +176,6 @@ categoria_colors = {
 # Crear una lista de colores basada en la paleta definida en category_colors
 colors = [categoria_colors[c] for c in df_max_min['Categoria'].unique()]
 
-#sns.barplot(y='Indice', x='Resultado', data=df_max_min,hue='Categoria',palette=colors)
-
-# graf2=sns.barplot(y='Indice', x='Resultado', data=df_max_min,hue='Categoria',palette=colors)
-# graf2.yaxis.set_tick_params(labelsize=14)
-# graf2.xaxis.set_tick_params(labelsize=14)
-# graf2.set_ylabel('')
-# graf2.set_xlabel('')
-
-# graf2.figure.set_figheight(15)
-# graf2.figure.set_figwidth(20)
-
-# # Agregar etiquetas
-# for index, row in df_max_min.iterrows():
-#     graf2.annotate(row['Servicio'],
-#                  #xy=(0,row['Row_number']),
-#                  xy=(100,row['Row_number']),
-#                  xytext=(15,0),
-#                  textcoords='offset points',
-#                  fontsize=18,
-#                  color=categoria_colors[row['Categoria']],)  # Color basado en la categoría
-# graf2.legend(bbox_to_anchor=(0, 1.05),fontsize=14)
-# # Eliminar las líneas de enmarcado
-# graf2.spines['top'].set_visible(False)
-# graf2.spines['right'].set_visible(False)
-# graf2.spines['bottom'].set_visible(True)
-# graf2.spines['left'].set_visible(True)
-
 
 # Crear el gráfico con Plotly Express
 graf2 = px.bar(df_max_min, y='Indice', x='Resultado', color='Categoria', color_discrete_map=categoria_colors)
@@ -223,32 +196,15 @@ graf2.update_layout(
     height=1300,  # Altura del gráfico en píxeles
 )
 
-# # Agregar etiquetas
-# y_shift = 0  # Variable para ajustar la posición vertical de las anotaciones
-# for index, row in df_max_min.iterrows():
-#     graf2.add_annotation(
-#         x=row['Resultado'], y=row['Indice'], text=row['Servicio'],
-#         font=dict(size=14, color=categoria_colors[row['Categoria']]),
-#         showarrow=False,
-#         xshift=300,
-#         yshift=y_shift,  # Ajuste vertical
-#     )
-#     y_shift -= 0.1  # Cambio en la posición vertical para la próxima anotación
+## Agregar etiquetas
 
-
-
-# Agregar líneas verticales y etiquetas
 y_shift = 0  # Variable para ajustar la posición vertical de las anotaciones
 for index, row in df_max_min.iterrows():
-    # # Agregar línea vertical
-    # graf2.add_shape(type='line',
-    #                 x0=row['Resultado'] - 0.5, y0=row['Row_number'] - 0.3,
-    #                 x1=row['Resultado'] - 0.5, y1=row['Row_number'] + 0.3,
-    #                 line=dict(color='rgb(8,48,107)', width=1.5))
     
     # Agregar etiqueta
     graf2.add_annotation(
-        x=row['Resultado'], y=row['Row_number'], text=row['Servicio'],
+        #x=row['Resultado'], y=row['Row_number'], text=row['Servicio'],
+        x=100, y=row['Row_number'], text=row['Servicio'],
         font=dict(size=14, color=categoria_colors[row['Categoria']]),
         showarrow=False,
         xshift=300,
@@ -259,12 +215,8 @@ for index, row in df_max_min.iterrows():
 
 
 
-
-
-
 st.plotly_chart(graf1)
 st.plotly_chart(graf2)
-#st.pyplot(graf2.figure)
 
 
 
