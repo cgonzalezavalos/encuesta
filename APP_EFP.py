@@ -123,7 +123,7 @@ else:
 #     df_resumen_indicaores=df_encuesta[(df_encuesta.Servicio==option_2) & (df_encuesta['Caracteristica de Comparacion']=='Todos') & (df_encuesta['Tipo']=='Indice')]
 # if option_1!='Todos' and option_2=='Todos':
      
-st.dataframe(df_promedios_todos)
+#st.dataframe(df_promedios_todos)
 #-------------------------------------------------------------------------
 
 
