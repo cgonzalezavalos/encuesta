@@ -200,7 +200,7 @@ graf2.legend(bbox_to_anchor=(0, 1.05),fontsize=14)
 
 
 st.plotly_chart(graf1)
-st.pyplot(graf2.figure)
+st.plotly_chart(graf2)
 
 
 
