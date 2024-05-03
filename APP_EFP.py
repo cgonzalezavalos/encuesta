@@ -110,10 +110,21 @@ with st.container():
 
 
 
+
+
+
+#-------------------------------------------------------------------------
+# aplicar filtros a df_resumen_indicadores
+if option_1=='Todos': #1
+     df_promedios_todos=df_promedios_todos.query("Sector=='Todos'")
+else:
+    df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
+#     # data frame con resumen de indicadores
+#     df_resumen_indicaores=df_encuesta[(df_encuesta.Servicio==option_2) & (df_encuesta['Caracteristica de Comparacion']=='Todos') & (df_encuesta['Tipo']=='Indice')]
+# if option_1!='Todos' and option_2=='Todos':
+     
 st.dataframe(df_promedios_todos)
-
-
-
+#-------------------------------------------------------------------------
 
 
 #-------------------------------------------------------------------------
@@ -126,12 +137,4 @@ st.dataframe(df_promedios_todos)
 
 
 
-#-------------------------------------------------------------------------
-# aplicar filtros a df_resumen_indicadores
-# if option_1=='Todos' and option_2=='Todos': #1
-#     # data frame con resumen de indicadores
-#     df_resumen_indicaores=df_encuesta[(df_encuesta.Servicio==option_2) & (df_encuesta['Caracteristica de Comparacion']=='Todos') & (df_encuesta['Tipo']=='Indice')]
-# if option_1!='Todos' and option_2=='Todos':
-     
 
-#-------------------------------------------------------------------------
