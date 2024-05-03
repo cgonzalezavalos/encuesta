@@ -177,32 +177,62 @@ colors = [categoria_colors[c] for c in df_max_min['Categoria'].unique()]
 
 #sns.barplot(y='Indice', x='Resultado', data=df_max_min,hue='Categoria',palette=colors)
 
-#graf2=sns.barplot(y='Indice', x='Resultado', data=df_max_min,hue='Categoria',palette=colors)
-graf2=px.bar(df_max_min,x='Resultado',y='Indice',color='Categoria',title=f'<b>Resultados Maximos y Minimos por Indice</b>').\
-    update_yaxes(visible=visible_y_axis,title_text=None)
-graf2.yaxis.set_tick_params(labelsize=14)
-graf2.xaxis.set_tick_params(labelsize=14)
-graf2.set_ylabel('')
-graf2.set_xlabel('')
+# graf2=sns.barplot(y='Indice', x='Resultado', data=df_max_min,hue='Categoria',palette=colors)
+# graf2.yaxis.set_tick_params(labelsize=14)
+# graf2.xaxis.set_tick_params(labelsize=14)
+# graf2.set_ylabel('')
+# graf2.set_xlabel('')
 
-graf2.figure.set_figheight(15)
-graf2.figure.set_figwidth(20)
+# graf2.figure.set_figheight(15)
+# graf2.figure.set_figwidth(20)
+
+# # Agregar etiquetas
+# for index, row in df_max_min.iterrows():
+#     graf2.annotate(row['Servicio'],
+#                  #xy=(0,row['Row_number']),
+#                  xy=(100,row['Row_number']),
+#                  xytext=(15,0),
+#                  textcoords='offset points',
+#                  fontsize=18,
+#                  color=categoria_colors[row['Categoria']],)  # Color basado en la categoría
+# graf2.legend(bbox_to_anchor=(0, 1.05),fontsize=14)
+# # Eliminar las líneas de enmarcado
+# graf2.spines['top'].set_visible(False)
+# graf2.spines['right'].set_visible(False)
+# graf2.spines['bottom'].set_visible(True)
+# graf2.spines['left'].set_visible(True)
+
+
+# Crear el gráfico con Plotly Express
+graf2 = px.bar(df_max_min, y='Indice', x='Resultado', color='Categoria', color_discrete_map=categoria_colors)
+
+# Personalizar el gráfico
+graf2.update_traces(marker_line_color='rgb(8,48,107)', marker_line_width=1.5, opacity=0.6)
+
+graf2.update_layout(
+    yaxis=dict(title='Indice', tickfont=dict(size=14)),
+    xaxis=dict(title='Resultado', tickfont=dict(size=14)),
+    legend=dict(font=dict(size=14)),
+    title='',
+    showlegend=True,
+    barmode='group',
+    bargap=0.15,
+    bargroupgap=0.1,
+)
 
 # Agregar etiquetas
 for index, row in df_max_min.iterrows():
-    graf2.annotate(row['Servicio'],
-                 #xy=(0,row['Row_number']),
-                 xy=(100,row['Row_number']),
-                 xytext=(15,0),
-                 textcoords='offset points',
-                 fontsize=18,
-                 color=categoria_colors[row['Categoria']],)  # Color basado en la categoría
-graf2.legend(bbox_to_anchor=(0, 1.05),fontsize=14)
-# Eliminar las líneas de enmarcado
-graf2.spines['top'].set_visible(False)
-graf2.spines['right'].set_visible(False)
-graf2.spines['bottom'].set_visible(True)
-graf2.spines['left'].set_visible(True)
+    graf2.add_annotation(
+        x=row['Resultado'], y=row['Indice'], text=row['Servicio'],
+        font=dict(size=14, color=categoria_colors[row['Categoria']]),
+        showarrow=False,
+        xshift=15,
+    )
+
+
+
+
+
 
 
 st.plotly_chart(graf1)
