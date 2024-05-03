@@ -251,10 +251,11 @@ for index, row in df_max_min.iterrows():
         x=row['Resultado'], y=row['Row_number'], text=row['Servicio'],
         font=dict(size=14, color=categoria_colors[row['Categoria']]),
         showarrow=False,
+        xshift=300,
         yshift=y_shift,  # Ajuste vertical
     )
     
-    y_shift -= 0.1  # Cambio en la posición vertical para la próxima anotación
+    y_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
 
 
 
