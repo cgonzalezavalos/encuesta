@@ -218,7 +218,7 @@ graf2.update_layout(
     barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
-    width=1500,  # Ancho del gráfico en píxeles
+    width=1800,  # Ancho del gráfico en píxeles
     height=1300,  # Altura del gráfico en píxeles
 )
 
@@ -227,7 +227,7 @@ for index, row in df_max_min.iterrows():
     graf2.add_annotation(
         x=row['Resultado'], y=row['Indice'], text=row['Servicio'],
         font=dict(size=14, color=categoria_colors[row['Categoria']]),
-        showarrow=False,
+        showarrow=True,
         xshift=300,
     )
 
