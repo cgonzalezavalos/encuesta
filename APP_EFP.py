@@ -43,6 +43,7 @@ def datos_encuesta():
 
     df=pd.merge(df,mt_indices,how='left',on='Indice')
     df=pd.merge(df,mt_servicios,how='left',on='Servicio')
+    df=df[df['Resultado']!='Respuentas Insuffientes (<10)']
     return df
 
 df_encuesta=datos_encuesta()
@@ -87,7 +88,6 @@ Sector = Sector['Sector'].tolist()
 
 sectores = df_encuesta[df_encuesta['Sector'] != 'Todos']['Sector'].unique()
 df_promedios_todos = pd.DataFrame()
-
 for sector in sectores:
     df_promedio_sector = df_encuesta[df_encuesta['Sector'] == sector].groupby('Indice')['Resultado'].mean().reset_index()
     df_promedio_sector['Sector'] = sector
@@ -97,7 +97,7 @@ df_promedios_todos.reset_index(drop=True, inplace=True)
 
 
 columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Dimensión','Servicio','Tipo'}
-df_promedios=df_encuesta.query("`Servicio`=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
+df_promedios=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
 
 
