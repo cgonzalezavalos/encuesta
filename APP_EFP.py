@@ -223,17 +223,41 @@ graf2.update_layout(
     height=1300,  # Altura del gráfico en píxeles
 )
 
-# Agregar etiquetas
+# # Agregar etiquetas
+# y_shift = 0  # Variable para ajustar la posición vertical de las anotaciones
+# for index, row in df_max_min.iterrows():
+#     graf2.add_annotation(
+#         x=row['Resultado'], y=row['Indice'], text=row['Servicio'],
+#         font=dict(size=14, color=categoria_colors[row['Categoria']]),
+#         showarrow=False,
+#         xshift=300,
+#         yshift=y_shift,  # Ajuste vertical
+#     )
+#     y_shift -= 0.1  # Cambio en la posición vertical para la próxima anotación
+
+
+
+# Agregar líneas verticales y etiquetas
 y_shift = 0  # Variable para ajustar la posición vertical de las anotaciones
 for index, row in df_max_min.iterrows():
+    # Agregar línea vertical
+    graf2.add_shape(type='line',
+                    x0=row['Resultado'] - 0.5, y0=row['Indice'] - 0.3,
+                    x1=row['Resultado'] - 0.5, y1=row['Indice'] + 0.3,
+                    line=dict(color='rgb(8,48,107)', width=1.5))
+    
+    # Agregar etiqueta
     graf2.add_annotation(
         x=row['Resultado'], y=row['Indice'], text=row['Servicio'],
         font=dict(size=14, color=categoria_colors[row['Categoria']]),
         showarrow=False,
-        xshift=300,
         yshift=y_shift,  # Ajuste vertical
     )
-    y_shift -= 0.1  # Cambio en la posición vertical para la próxima anotación
+    
+    y_shift -= 0.6  # Cambio en la posición vertical para la próxima anotación
+
+
+
 
 
 
