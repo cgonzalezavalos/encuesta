@@ -132,7 +132,7 @@ df_min=pd.DataFrame({'Indice':Indice,'Categoria':'Minimo','Resultado':Minimo,'Se
 df_max_min=pd.concat([df_max,df_min])
 df_max_min.sort_values(by=['Indice','Categoria'],inplace=True)
 df_max_min['Row_number'] = np.where(df_max_min.reset_index().index==0,0,df_max_min.reset_index().index*0.5)-0.3
-df_max_min
+#df_max_min
 
 #-------------------------------------------------------------------------
 
@@ -197,10 +197,10 @@ for index, row in df_max_min.iterrows():
                  color=categoria_colors[row['Categoria']],)  # Color basado en la categoría
 graf2.legend(bbox_to_anchor=(0, 1.05),fontsize=14)
 # Eliminar las líneas de enmarcado
-#graf2.despine()
-
-
-
+graf2.spines['top'].set_visible(False)
+graf2.spines['right'].set_visible(False)
+graf2.spines['bottom'].set_visible(True)
+graf2.spines['left'].set_visible(True)
 
 
 st.plotly_chart(graf1)
