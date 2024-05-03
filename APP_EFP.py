@@ -217,7 +217,7 @@ graf2.update_layout(
     title='',
     showlegend=True,
     barmode='group',
-    bargap=1,#0.15,
+    bargap=0.15,
     bargroupgap=0.1,
     width=1800,  # Ancho del gráfico en píxeles
     height=1300,  # Altura del gráfico en píxeles
