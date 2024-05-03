@@ -218,23 +218,22 @@ graf2.update_layout(
     showlegend=True,
     barmode='group',
     bargap=0.15,
-    bargroupgap=1,
+    bargroupgap=0.1,
     width=1800,  # Ancho del gráfico en píxeles
     height=1300,  # Altura del gráfico en píxeles
 )
 
 # Agregar etiquetas
+y_shift = 0  # Variable para ajustar la posición vertical de las anotaciones
 for index, row in df_max_min.iterrows():
     graf2.add_annotation(
         x=row['Resultado'], y=row['Indice'], text=row['Servicio'],
         font=dict(size=14, color=categoria_colors[row['Categoria']]),
         showarrow=False,
         xshift=300,
+        yshift=y_shift,  # Ajuste vertical
     )
-
-
-
-
+    y_shift -= 30  # Cambio en la posición vertical para la próxima anotación
 
 
 
