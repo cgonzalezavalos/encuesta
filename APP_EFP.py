@@ -129,11 +129,11 @@ st.dataframe(df_promedios_todos)
 
 #-------------------------------------------------------------------------
 # gráfico general de resultados por indices
-# graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title='<b>Resultados por Indices</b>').update_yaxes(visible=visible_y_axis,title_text=None).\
-#                 update_xaxes(title_text=None)
-# graf1.update_layout(yaxis_tickformat='.0f')
+graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title='<b>Resultados por Indices</b>').update_yaxes(visible=visible_y_axis,title_text=None).\
+                 update_xaxes(title_text=None)
+graf1.update_layout(yaxis_tickformat='.0f')
 
-# st.plotly_chart(graf1)
+st.plotly_chart(graf1)
 
 
 
