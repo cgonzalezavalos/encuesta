@@ -162,7 +162,7 @@ else:
 
 #------------------------------------------------------------------------
 # gráfico general de resultados por indices
-graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>').update_yaxes(visible=visible_y_axis,title_text=None).\
+graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
 graf1.update_layout(yaxis_tickformat='.0f',width=1000,  # Ancho del gráfico en píxeles
     height=800,)
