@@ -180,7 +180,7 @@ colors = [categoria_colors[c] for c in df_max_min['Categoria'].unique()]
 
 
 # Crear el gráfico con Plotly Express
-graf2 = px.bar(df_max_min, y='Indice', x='Resultado', color='Categoria', color_discrete_map=categoria_colors)
+graf2 = px.bar(df_max_min, y='Indice', x='Resultado', color='Categoria', color_discrete_map=categoria_colors,title='<b>Servicios con mayor y menor resultado por indice</b>')
 
 # Personalizar el gráfico
 
@@ -217,9 +217,7 @@ for index, row in df_max_min.iterrows():
     y_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
 
 
-st.write('Resultados por Indices')
 st.plotly_chart(graf1)
-st.write('Servicios con mayor y menor resultado por indice')
 st.plotly_chart(graf2)
 
 
