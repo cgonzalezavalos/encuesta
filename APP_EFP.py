@@ -242,8 +242,8 @@ y_shift = 0  # Variable para ajustar la posición vertical de las anotaciones
 for index, row in df_max_min.iterrows():
     # Agregar línea vertical
     graf2.add_shape(type='line',
-                    x0=row['Resultado'] - 0.5, y0=row['Indice'] - 0.3,
-                    x1=row['Resultado'] - 0.5, y1=row['Indice'] + 0.3,
+                    x0=row['Resultado'] - 0.5, y0=row['Row_number'] - 0.3,
+                    x1=row['Resultado'] - 0.5, y1=row['Row_number'] + 0.3,
                     line=dict(color='rgb(8,48,107)', width=1.5))
     
     # Agregar etiqueta
