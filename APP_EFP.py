@@ -183,6 +183,7 @@ colors = [categoria_colors[c] for c in df_max_min['Categoria'].unique()]
 graf2 = px.bar(df_max_min, y='Indice', x='Resultado', color='Categoria', color_discrete_map=categoria_colors)
 
 # Personalizar el gráfico
+
 graf2.update_traces(marker_line_color='rgb(8,48,107)', marker_line_width=1.5, opacity=0.6)
 
 graf2.update_layout(
@@ -216,8 +217,9 @@ for index, row in df_max_min.iterrows():
     y_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
 
 
-
+st.write('Resultados por Indices')
 st.plotly_chart(graf1)
+st.write('Servicios con mayor y menor resultado por indice')
 st.plotly_chart(graf2)
 
 
