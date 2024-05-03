@@ -176,11 +176,15 @@ categoria_colors = {
 colors = [categoria_colors[c] for c in df_max_min['Categoria'].unique()]
 
 #sns.barplot(y='Indice', x='Resultado', data=df_max_min,hue='Categoria',palette=colors)
+
 graf2=sns.barplot(y='Indice', x='Resultado', data=df_max_min,hue='Categoria',palette=colors)
 graf2.yaxis.set_tick_params(labelsize=14)
 graf2.xaxis.set_tick_params(labelsize=14)
 graf2.set_ylabel('')
 graf2.set_xlabel('')
+
+graf2.figure.set_figheight(15)
+graf2.figure.set_figwidth(20)
 
 # Agregar etiquetas
 for index, row in df_max_min.iterrows():
@@ -200,7 +204,7 @@ graf2.legend(bbox_to_anchor=(0, 1.05),fontsize=14)
 
 
 st.plotly_chart(graf1)
-st.plotly_chart(graf2)
+st.pyplot(graf2.figure)
 
 
 
