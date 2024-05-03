@@ -193,7 +193,7 @@ for index, row in df_max_min.iterrows():
                  xy=(100,row['Row_number']),
                  xytext=(15,0),
                  textcoords='offset points',
-                 fontsize=14,
+                 fontsize=18,
                  color=categoria_colors[row['Categoria']],)  # Color basado en la categoría
 graf2.legend(bbox_to_anchor=(0, 1.05),fontsize=14)
 # Eliminar las líneas de enmarcado
