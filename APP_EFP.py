@@ -34,6 +34,7 @@ st.markdown(
 st.markdown("<hr>", unsafe_allow_html=True)
 
 #--------------------------------------------------------------------------
+# función para tener los datos en memoria cache
 @st.cache_data
 def datos_encuesta():
     df=pd.read_excel('BBDD Todos_rev.xlsx')
@@ -44,36 +45,93 @@ def datos_encuesta():
     df=pd.merge(df,mt_servicios,how='left',on='Servicio')
     return df
 
-
 df_encuesta=datos_encuesta()
-
 #-------------------------------------------------------------------------
-# data frame con resumen de indicadores
-df_resumen_indicaores=df_encuesta.query("`Servicio`=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'") #`Indice` == 'Satisfaccion Laboral' & 
+# Función para seleccionar servicios segun ministerio seleccionado
+def select_servicio(df_encuesta, option_2):
+    if option_2 == 'Todos':
+        unique_servicio = option_2['Servicio'].unique()
+    else:
+        unique_servicio = df_encuesta.query(f'Sector == "{option_2}"')['Servicio'].unique()
+    Servicio = pd.DataFrame({'Servicio': unique_servicio})
+    nuevo_registro = pd.DataFrame({'Servicio': ['Todos']})
+    Servicio = pd.concat([nuevo_registro, Servicio]).Servicio.tolist()
 
+    return Servicio
 #-------------------------------------------------------------------------
-# Definir un diccionario de colores para las categorías
+
+# Definir un diccionario de colores para las categoríasn de minimos y maximos por caracteristicas de comparación
 categoria_colors = {
     'Minimo': 'orange',
     'Maximo': 'blue'
 }
-
+# Definir un diccionario de colores para las dimensiones asociadas a los indices
 dimension_colors ={
     'Actitudes Laborales': '#57AADE',
     'Prácticas de Gestión de Personas': '#DE5757'
 }
-
 #--------------------------------------------------------------------------
 # configuración gráficos
 visible_y_axis=False
 #--------------------------------------------------------------------------
-#st.dataframe(df_resumen_indicaores)
+# tabla de sectores
+unique_sector = df_encuesta['Sector'].unique()
+Sector = pd.DataFrame({'Sector': unique_sector})
+nuevo_registro = pd.DataFrame({'Sector': ['Todos']})
+Sector = pd.concat([nuevo_registro, Sector])
+Sector = Sector.reset_index(drop=True)
+Sector = Sector['Sector'].tolist()
+
+#-------------------------------------------------------------------------
+
+
+sectores = df_resumen_indicadores[df_resumen_indicadores['Sector'] != 'Todos']['Sector'].unique()
+df_promedios_todos = pd.DataFrame()
+
+for sector in sectores:
+    df_promedio_sector = df_resumen_indicadores[df_resumen_indicadores['Sector'] == sector].groupby('Indice')['Resultado'].mean().reset_index()
+    df_promedio_sector['Sector'] = sector
+    df_promedios_todos = pd.concat([df_promedios_todos, df_promedio_sector])
+
+df_promedios_todos.reset_index(drop=True, inplace=True)
+
+
+columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Dimensión','Servicio','Tipo'}
+df_promedios=df_encuesta.query("`Servicio`=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
+df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
+
+
+with st.container():
+            col1,col2=st.columns(2,gap="large")
+            with col1:
+                option_1 = st.selectbox('Sector',Sector)
+            with col2:
+                option_2 = st.selectbox('Servicio',select_servicio(df_encuesta,option_1))
+
+
+
+st.dataframe(df_promedios_todos)
+
+
+
 
 
 #-------------------------------------------------------------------------
-# gráfico Convocatorias por Año
+# gráfico general de resultados por indices
 graf1=px.bar(df_resumen_indicaores,x='Indice',y='Resultado',title='<b>Resultados por Indices</b>').update_yaxes(visible=visible_y_axis,title_text=None).\
                 update_xaxes(title_text=None)
 graf1.update_layout(yaxis_tickformat='.0f')
 
 st.plotly_chart(graf1)
+
+
+
+#-------------------------------------------------------------------------
+# aplicar filtros a df_resumen_indicadores
+# if option_1=='Todos' and option_2=='Todos': #1
+#     # data frame con resumen de indicadores
+#     df_resumen_indicaores=df_encuesta[(df_encuesta.Servicio==option_2) & (df_encuesta['Caracteristica de Comparacion']=='Todos') & (df_encuesta['Tipo']=='Indice')]
+# if option_1!='Todos' and option_2=='Todos':
+     
+
+#-------------------------------------------------------------------------
