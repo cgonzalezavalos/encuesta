@@ -100,14 +100,14 @@ columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Co
 df_promedios=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
 #-------------------------------------------------------------------------
-indices=df['Indice'].unique()
+indices=df_encuesta['Indice'].unique()
 Maximo=[]
 Minimo=[]
 Servicio_Maximo=[]
 Servicio_Minimo=[]
 Indice=[]
 for indice in indices:
-    datos_x_indice=df.query(f"Servicio!='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice' & Indice=='{indice}' & Resultado!='Respuentas Insuffientes (<10)'")
+    datos_x_indice=df_encuesta.query(f"Servicio!='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice' & Indice=='{indice}' & Resultado!='Respuentas Insuffientes (<10)'")
     for i in range(datos_x_indice.shape[0]):
         if i==0:
             ResultadoMaximo=datos_x_indice.iloc[i]['Resultado']
