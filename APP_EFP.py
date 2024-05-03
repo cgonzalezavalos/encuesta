@@ -248,7 +248,7 @@ for index, row in df_max_min.iterrows():
     
     # Agregar etiqueta
     graf2.add_annotation(
-        x=row['Resultado'], y=row['Indice'], text=row['Servicio'],
+        x=row['Resultado'], y=row['Row_number'], text=row['Servicio'],
         font=dict(size=14, color=categoria_colors[row['Categoria']]),
         showarrow=False,
         yshift=y_shift,  # Ajuste vertical
