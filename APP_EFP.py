@@ -254,7 +254,7 @@ for index, row in df_max_min.iterrows():
         yshift=y_shift,  # Ajuste vertical
     )
     
-    y_shift -= 0.6  # Cambio en la posición vertical para la próxima anotación
+    y_shift -= 0.1  # Cambio en la posición vertical para la próxima anotación
 
 
 
