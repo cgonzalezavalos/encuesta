@@ -218,8 +218,8 @@ graf2.update_layout(
     barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
-    width=1300,  # Ancho del gráfico en píxeles
-    height=1000,  # Altura del gráfico en píxeles
+    width=1500,  # Ancho del gráfico en píxeles
+    height=1300,  # Altura del gráfico en píxeles
 )
 
 # Agregar etiquetas
