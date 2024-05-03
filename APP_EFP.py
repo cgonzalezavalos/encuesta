@@ -99,7 +99,42 @@ df_promedios_todos.reset_index(drop=True, inplace=True)
 columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Dimensión','Servicio','Tipo'}
 df_promedios=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
+#-------------------------------------------------------------------------
+indices=df['Indice'].unique()
+Maximo=[]
+Minimo=[]
+Servicio_Maximo=[]
+Servicio_Minimo=[]
+Indice=[]
+for indice in indices:
+    datos_x_indice=df.query(f"Servicio!='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice' & Indice=='{indice}' & Resultado!='Respuentas Insuffientes (<10)'")
+    for i in range(datos_x_indice.shape[0]):
+        if i==0:
+            ResultadoMaximo=datos_x_indice.iloc[i]['Resultado']
+            ServicioMaximo=datos_x_indice.iloc[i]['Servicio']
+            ResultadoMinimo=datos_x_indice.iloc[i]['Resultado']
+        else:
+            if datos_x_indice.iloc[i]['Resultado']>ResultadoMaximo:
+                ResultadoMaximo=datos_x_indice.iloc[i]['Resultado']
+                ServicioMaximo=datos_x_indice.iloc[i]['Servicio']
+            if datos_x_indice.iloc[i]['Resultado']<ResultadoMinimo:
+                ResultadoMinimo=datos_x_indice.iloc[i]['Resultado']
+                ServicioMinimo=datos_x_indice.iloc[i]['Servicio']
+    #display(f"El servicio con mayor {indice} es {ServicioMaximo} con {ResultadoMaximo}")
+    #display(f"El servicio con menor {indice} es {ServicioMinimo} con {ResultadoMinimo}")
+    Maximo.append(ResultadoMaximo)
+    Minimo.append(ResultadoMinimo)
+    Servicio_Maximo.append(ServicioMaximo)
+    Servicio_Minimo.append(ServicioMinimo)
+    Indice.append(indice)
+df_max=pd.DataFrame({'Indice':Indice,'Categoria':'Maximo','Resultado':Maximo,'Servicio':Servicio_Maximo})
+df_min=pd.DataFrame({'Indice':Indice,'Categoria':'Minimo','Resultado':Minimo,'Servicio':Servicio_Minimo})
+df_max_min=pd.concat([df_max,df_min])
+df_max_min.sort_values(by=['Indice','Categoria'],inplace=True)
+df_max_min['Row_number'] = np.where(df_max_min.reset_index().index==0,0,df_max_min.reset_index().index*0.5)-0.3
+df_max_min
 
+#-------------------------------------------------------------------------
 
 with st.container():
             col1,col2=st.columns(2,gap="large")
@@ -107,8 +142,6 @@ with st.container():
                 option_1 = st.selectbox('Sector',Sector)
             with col2:
                 option_2 = st.selectbox('Servicio',select_servicio(df_encuesta,option_1))
-
-
 
 
 
@@ -127,11 +160,44 @@ else:
 #-------------------------------------------------------------------------
 
 
-#-------------------------------------------------------------------------
+#------------------------------------------------------------------------
 # gráfico general de resultados por indices
 graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>').update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
 graf1.update_layout(yaxis_tickformat='.0f')
+
+#------------------------------------------------------------------------
+# Definir un diccionario de colores para las categorías
+categoria_colors = {
+    'Minimo': 'orange',
+    'Maximo': 'blue'
+}
+# Crear una lista de colores basada en la paleta definida en category_colors
+colors = [categoria_colors[c] for c in df_max_min['Categoria'].unique()]
+
+#sns.barplot(y='Indice', x='Resultado', data=df_max_min,hue='Categoria',palette=colors)
+graf2=sns.barplot(y='Indice', x='Resultado', data=df_max_min,hue='Categoria',palette=colors)
+graf2.yticks(fontsize=14)
+graf2.xticks(fontsize=14)
+graf2.ylabel('')
+graf2.xlabel('')
+
+# Agregar etiquetas
+for index, row in df_max_min.iterrows():
+    graf2.annotate(row['Servicio'],
+                 #xy=(0,row['Row_number']),
+                 xy=(100,row['Row_number']),
+                 xytext=(15,0),
+                 textcoords='offset points',
+                 fontsize=14,
+                 color=categoria_colors[row['Categoria']],)  # Color basado en la categoría
+graf2.legend(bbox_to_anchor=(0, 1.05),fontsize=14)
+# Eliminar las líneas de enmarcado
+graf2.despine()
+
+
+
+
 
 st.plotly_chart(graf1)
 
