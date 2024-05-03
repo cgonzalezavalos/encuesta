@@ -226,7 +226,7 @@ for index, row in df_max_min.iterrows():
         x=row['Resultado'], y=row['Indice'], text=row['Servicio'],
         font=dict(size=14, color=categoria_colors[row['Categoria']]),
         showarrow=False,
-        xshift=100,
+        xshift=300,
     )
 
 
