@@ -92,6 +92,11 @@ Sector = Sector.reset_index(drop=True)
 Sector = Sector['Sector'].tolist()
 
 #-------------------------------------------------------------------------
+# Promedio todos los sectores x indice
+df_todos = df_encuesta[(df_encuesta['Servicio'] == 'Todos') & (df_encuesta['Caracteristica de Comparacion'] =='Todos') & (df_encuesta['Tipo'] =='Indice')]
+columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Sector','Tipo'}
+df_todos=df_encuesta.drop(columns=columnas_drop)
+#-------------------------------------------------------------------------
 #Promedios por Sector
 
 sectores = df_encuesta[df_encuesta['Sector'] != 'Todos']['Sector'].unique()
@@ -184,12 +189,12 @@ if option_1=='Todos' and option_2!='Todos':
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Servicio=='{option_2}'")
      
 
-# with st.container():
-#     col1,col2=st.columns(2)
-#     with col1:
-#         st.dataframe(df_promedios_todos)
-#     with col2:
-#         st.dataframe(df_promedios_servicios_todos)
+with st.container():
+    col1,col2=st.columns(2)
+    with col1:
+        st.dataframe(df_promedios_todos)
+    with col2:
+        st.dataframe(df_todos)
 #-------------------------------------------------------------------------
 
 
@@ -201,6 +206,10 @@ if version_grafico=='version_1':
 if version_grafico=='version_2':
     graf1=px.bar(df_promedios_servicios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_2} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
+    # Agregar la serie del total nacional
+    #graf1.add_bar(x=df_total['Indice'], y=df_total_nacional['Resultado'], name='Total Nacional')
+
+
 
 graf1.update_layout(yaxis_tickformat='.0f',width=1000,  # Ancho del gráfico en píxeles
     height=800,)
