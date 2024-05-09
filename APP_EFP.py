@@ -111,6 +111,7 @@ df_promedios_todos.reset_index(drop=True, inplace=True)
 columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
 df_promedios=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
+df_promedios_todos['Resultado']=df_promedios_todos['Resultado'].round(2)
 
 #-------------------------------------------------------------------------
 #Promedios por Servicio
@@ -209,7 +210,7 @@ if version_grafico=='version_2':
     graf1=px.bar(df_promedios_servicios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_2} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
 if version_grafico=='version_3':
-    graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color='Sector', barmode='group',text='Resultado').\
+    graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices entre todos los sectores y {option_1}</b>',color='Sector', barmode='group',text='Resultado').\
         update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
     #,color='Sector', barmode='group'
