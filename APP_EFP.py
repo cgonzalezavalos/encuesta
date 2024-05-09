@@ -35,7 +35,7 @@ st.markdown("<hr>", unsafe_allow_html=True)
 #-----------------------------------------------------------------------------------------
 
 with st.sidebar:
-    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre maximos y mínimos'])
+    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre maximos y mínimos', 'Comparación por sexo','Comparación por rango etario' ])
 
 #--------------------------------------------------------------------------
 # función para tener los datos en memoria cache
