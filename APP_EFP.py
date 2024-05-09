@@ -49,11 +49,11 @@ def datos_encuesta():
 df_encuesta=datos_encuesta()
 #-------------------------------------------------------------------------
 # Función para seleccionar servicios segun ministerio seleccionado
-def select_servicio(df_encuesta, option_2):
+def select_servicio(df_encuesta, option_1):
     if option_2 == 'Todos':
         unique_servicio = df_encuesta['Servicio'].unique()
     else:
-        unique_servicio = df_encuesta.query(f'Sector == "{option_2}"')['Servicio'].unique()
+        unique_servicio = df_encuesta.query(f'Sector == "{option_1}"')['Servicio'].unique()
     Servicio = pd.DataFrame({'Servicio': unique_servicio})
     #nuevo_registro = pd.DataFrame({'Servicio': ['Todos']})
     #Servicio = pd.concat([nuevo_registro, Servicio]).Servicio.tolist()
