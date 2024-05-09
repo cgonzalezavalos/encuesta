@@ -178,7 +178,7 @@ if option_1=='Todos' and option_2=='Todos': #1
 if option_1!='Todos' and option_2=='Todos':
     version_grafico='version_3'
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
-    df_promedios_todos=pd.concat([df_promedios_todos,df_todos])
+    #df_promedios_todos=pd.concat([df_promedios_todos,df_todos])
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Sector=='{option_1}'")
 
 if option_1!='Todos' and option_2!='Todos':
@@ -192,7 +192,7 @@ if option_1=='Todos' and option_2!='Todos':
      
 
 with st.container():
-    col1,col2=st.columns(2)
+    col1,col2,col3=st.columns(3)
     with col1:
         st.dataframe(df_promedios_todos)
     with col2:
