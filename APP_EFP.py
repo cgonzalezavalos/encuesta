@@ -40,11 +40,12 @@ def datos_encuesta():
     df=pd.read_excel('BBDD Todos_rev.xlsx')
     mt_indices=pd.read_excel('Maestros.xlsx',sheet_name='indices')
     mt_servicios=pd.read_excel('Maestros.xlsx',sheet_name='servicios')
-
     df=pd.merge(df,mt_indices,how='left',on='Indice')
     df=pd.merge(df,mt_servicios,how='left',on='Servicio')
     df=df[df['Resultado']!='Respuentas Insuffientes (<10)']
+    df['Resultado']=df['Resultado'].astype(float)
     return df
+
 
 df_encuesta=datos_encuesta()
 
