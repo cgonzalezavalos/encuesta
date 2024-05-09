@@ -94,8 +94,9 @@ Sector = Sector['Sector'].tolist()
 #-------------------------------------------------------------------------
 # Promedio todos los sectores x indice
 df_todos = df_encuesta[(df_encuesta['Servicio'] == 'Todos') & (df_encuesta['Caracteristica de Comparacion'] =='Todos') & (df_encuesta['Tipo'] =='Indice')]
-columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Sector','Tipo'}
+columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
 df_todos=df_encuesta.drop(columns=columnas_drop)
+df_todos['Sector']='Todos'
 #-------------------------------------------------------------------------
 #Promedios por Sector
 
