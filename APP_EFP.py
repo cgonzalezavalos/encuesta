@@ -108,7 +108,7 @@ for servicio in Servicios:
     df_promedios_servicios['Servicio'] = servicio
     df_promedios_servicios_todos = pd.concat([df_promedios_servicios_todos, df_promedios_servicios])
 
-columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Dimensión','Sector','Tipo'}
+columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Dimensión','Tipo'}
 df_promedios=df_encuesta.query("`Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_servicios_todos=pd.concat([df_promedios_servicios_todos, df_promedios])
 
@@ -164,7 +164,7 @@ if option_1!='Todos' and option_2=='Todos':
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
 
 if option_1!='Todos' and option_2!='Todos':
-    df_promedios_todos=df_promedios_todos[df_promedios_todos(['Sector']=='{option_1}') & (df_promedios_todos['Servicio']=='{option_2}')]
+    df_promedios_servicios_todos=df_promedios_servicios_todos[df_promedios_servicios_todos(['Sector']=='{option_1}') & (df_promedios_servicios_todos['Servicio']=='{option_2}')]
 #     # data frame con resumen de indicadores
 #     df_resumen_indicaores=df_encuesta[(df_encuesta.Servicio==option_2) & (df_encuesta['Caracteristica de Comparacion']=='Todos') & (df_encuesta['Tipo']=='Indice')]
 # if option_1!='Todos' and option_2=='Todos':
