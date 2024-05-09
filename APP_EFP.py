@@ -32,6 +32,10 @@ st.markdown(
 #st.caption(f'Fecha de actualización: _{fecha_actualizacion}_')
 # Add horizontal line
 st.markdown("<hr>", unsafe_allow_html=True)
+#-----------------------------------------------------------------------------------------
+
+with st.sidebar:
+    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre maximos y mínimos'])
 
 #--------------------------------------------------------------------------
 # función para tener los datos en memoria cache
@@ -171,6 +175,7 @@ with st.container():
                 option_2 = st.selectbox('Servicio',select_servicio(df_encuesta,option_1))
 
 #-------------------------------------------------------------------------
+
 # aplicar filtros a df_resumen_indicadores
 if option_1=='Todos' and option_2=='Todos': #1
      version_grafico='version_1'
@@ -269,9 +274,10 @@ for index, row in df_max_min.iterrows():
     
     y_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
 
-
-st.plotly_chart(graf1)
-st.plotly_chart(graf2)
+if opcion_visualizacion=='Sector y Servicio':
+    st.plotly_chart(graf1)
+if opcion_visualizacion=='Comparación entre maximos y mínimos':
+    st.plotly_chart(graf2)
 
 
 
