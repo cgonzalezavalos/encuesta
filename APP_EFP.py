@@ -50,7 +50,7 @@ df_encuesta=datos_encuesta()
 #-------------------------------------------------------------------------
 # Función para seleccionar servicios segun ministerio seleccionado
 def select_servicio(df_encuesta, option_1):
-    if option_2 == 'Todos':
+    if option_1 == 'Todos':
         unique_servicio = df_encuesta['Servicio'].unique()
     else:
         unique_servicio = df_encuesta.query(f'Sector == "{option_1}"')['Servicio'].unique()
