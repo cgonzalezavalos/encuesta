@@ -169,7 +169,13 @@ if option_1!='Todos' and option_2!='Todos':
 #     df_resumen_indicaores=df_encuesta[(df_encuesta.Servicio==option_2) & (df_encuesta['Caracteristica de Comparacion']=='Todos') & (df_encuesta['Tipo']=='Indice')]
 # if option_1!='Todos' and option_2=='Todos':
      
-st.dataframe(df_promedios_todos)
+
+with st.container():
+    col1,col2=st.columns(2)
+    with col1:
+        st.dataframe(df_promedios_todos)
+    with col2:
+        st.dataframe(df_promedios_servicios_todos)
 #-------------------------------------------------------------------------
 
 
