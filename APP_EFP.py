@@ -170,6 +170,7 @@ if option_1=='Todos' and option_2=='Todos': #1
 
 if option_1!='Todos' and option_2=='Todos':
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
+    df_promedios_servicios_todos=df_promedios_servicios_todos[(df_promedios_servicios_todos['Sector']=='{option_1}')]
 
 if option_1!='Todos' and option_2!='Todos':
     #df_promedios_servicios_todos=df_promedios_servicios_todos[df_promedios_servicios_todos(['Sector']=='{option_1}') & (df_promedios_servicios_todos['Servicio']=='{option_2}')]
