@@ -78,8 +78,8 @@ visible_y_axis=False
 # tabla de sectores
 unique_sector = df_encuesta['Sector'].unique()
 Sector = pd.DataFrame({'Sector': unique_sector})
-nuevo_registro = pd.DataFrame({'Sector': ['Todos']})
-Sector = pd.concat([nuevo_registro, Sector])
+#nuevo_registro = pd.DataFrame({'Sector': ['Todos']})
+#Sector = pd.concat([nuevo_registro, Sector])
 Sector = Sector.reset_index(drop=True)
 Sector = Sector['Sector'].tolist()
 
@@ -148,10 +148,14 @@ with st.container():
 
 #-------------------------------------------------------------------------
 # aplicar filtros a df_resumen_indicadores
-if option_1=='Todos': #1
+if option_1=='Todos' and option_2=='Todos': #1
      df_promedios_todos=df_promedios_todos.query("Sector=='Todos'")
-else:
+
+if option_1!='Todos' and option_2=='Todos':
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
+
+if option_1!='Todos' and option_2!='Todos':
+    df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}' and Servicio=='{option_2}'")
 #     # data frame con resumen de indicadores
 #     df_resumen_indicaores=df_encuesta[(df_encuesta.Servicio==option_2) & (df_encuesta['Caracteristica de Comparacion']=='Todos') & (df_encuesta['Tipo']=='Indice')]
 # if option_1!='Todos' and option_2=='Todos':
