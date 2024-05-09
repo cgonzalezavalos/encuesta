@@ -84,7 +84,7 @@ Sector = Sector.reset_index(drop=True)
 Sector = Sector['Sector'].tolist()
 
 #-------------------------------------------------------------------------
-
+#Promedios por Sector
 
 sectores = df_encuesta[df_encuesta['Sector'] != 'Todos']['Sector'].unique()
 df_promedios_todos = pd.DataFrame()
@@ -94,11 +94,23 @@ for sector in sectores:
     df_promedios_todos = pd.concat([df_promedios_todos, df_promedio_sector])
 
 df_promedios_todos.reset_index(drop=True, inplace=True)
-
-
 columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Dimensión','Servicio','Tipo'}
 df_promedios=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
+
+#-------------------------------------------------------------------------
+#Promedios por Servicio
+Servicios = df_encuesta[df_encuesta['Servicio'] != 'Todos']['Servicio'].unique()
+df_promedios_servicios = pd.DataFrame()
+for servicio in Servicios:
+    df_promedios_servicios = df_encuesta[df_encuesta['Servicio'] == servicio].groupby('Indice')['Resultado'].mean().reset_index()
+    df_promedios_servicios['Servicio'] = servicio
+    df_promedios_servicios_todos = pd.concat([df_promedios_servicios_todos, df_promedios_servicios])
+
+columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Dimensión','Sector','Tipo'}
+df_promedios=df_encuesta.query("`Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
+df_promedios_servicios_todos=pd.concat([df_promedios_servicios_todos, df_promedios])
+
 #-------------------------------------------------------------------------
 indices=df_encuesta['Indice'].unique()
 Maximo=[]
@@ -135,16 +147,12 @@ df_max_min['Row_number'] = np.where(df_max_min.reset_index().index==0,0,df_max_m
 #df_max_min
 
 #-------------------------------------------------------------------------
-
 with st.container():
             col1,col2=st.columns(2,gap="large")
             with col1:
                 option_1 = st.selectbox('Sector',Sector)
             with col2:
                 option_2 = st.selectbox('Servicio',select_servicio(df_encuesta,option_1))
-
-
-
 
 #-------------------------------------------------------------------------
 # aplicar filtros a df_resumen_indicadores
