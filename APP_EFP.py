@@ -47,6 +47,13 @@ def datos_encuesta():
     return df
 
 df_encuesta=datos_encuesta()
+
+@st.cache_data
+def maestro_servicios():
+    mt_servicios=pd.read_excel('Maestros.xlsx',sheet_name='servicios')
+    return mt_servicios
+
+df_mt_servicios=maestro_servicios()
 #-------------------------------------------------------------------------
 # Función para seleccionar servicios segun ministerio seleccionado
 def select_servicio(df_encuesta, option_1):
@@ -108,9 +115,10 @@ for servicio in Servicios:
     df_promedios_servicios['Servicio'] = servicio
     df_promedios_servicios_todos = pd.concat([df_promedios_servicios_todos, df_promedios_servicios])
 
-columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Dimensión','Tipo'}
+columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Sector','Codificacion','Dimensión','Tipo'}
 df_promedios=df_encuesta.query("`Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_servicios_todos=pd.concat([df_promedios_servicios_todos, df_promedios])
+df_promedios_servicios_todos=pd.merge(df_promedios_servicios_todos,df_mt_servicios,on='Servicio',how='left')
 
 #-------------------------------------------------------------------------
 indices=df_encuesta['Indice'].unique()
