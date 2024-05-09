@@ -184,12 +184,12 @@ if option_1=='Todos' and option_2!='Todos':
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Servicio=='{option_2}'")
      
 
-with st.container():
-    col1,col2=st.columns(2)
-    with col1:
-        st.dataframe(df_promedios_todos)
-    with col2:
-        st.dataframe(df_promedios_servicios_todos)
+# with st.container():
+#     col1,col2=st.columns(2)
+#     with col1:
+#         st.dataframe(df_promedios_todos)
+#     with col2:
+#         st.dataframe(df_promedios_servicios_todos)
 #-------------------------------------------------------------------------
 
 
