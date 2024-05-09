@@ -209,7 +209,7 @@ if version_grafico=='version_2':
     graf1=px.bar(df_promedios_servicios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_2} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
 if version_grafico=='version_3':
-    graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color='Sector', barmode='group').\
+    graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color='Sector', barmode='group',text='Resultado').\
         update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
     #,color='Sector', barmode='group'
@@ -219,7 +219,7 @@ if version_grafico=='version_3':
 graf1.update_layout(yaxis_tickformat='.0f',width=1000,  # Ancho del gráfico en píxeles
     height=800,)
 # Mostrar los valores sobre las barras
-graf1.update_traces(text=graf1.data[0]['y'], texttemplate='%{text:.0f}', textposition='outside')
+#graf1.update_traces(text=graf1.data[0]['y'], texttemplate='%{text:.0f}', textposition='outside')
 
 #------------------------------------------------------------------------
 # Definir un diccionario de colores para las categorías
