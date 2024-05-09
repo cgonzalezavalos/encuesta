@@ -102,7 +102,7 @@ for sector in sectores:
     df_promedios_todos = pd.concat([df_promedios_todos, df_promedio_sector])
 
 df_promedios_todos.reset_index(drop=True, inplace=True)
-columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Dimensión','Servicio','Tipo'}
+columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
 df_promedios=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
 
@@ -166,17 +166,21 @@ with st.container():
 #-------------------------------------------------------------------------
 # aplicar filtros a df_resumen_indicadores
 if option_1=='Todos' and option_2=='Todos': #1
+     version_grafico='version_1'
      df_promedios_todos=df_promedios_todos.query("Sector=='Todos'")
 
 if option_1!='Todos' and option_2=='Todos':
+    version_grafico='version_1'
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Sector=='{option_1}'")
 
 if option_1!='Todos' and option_2!='Todos':
+    version_grafico='version_2'
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Servicio=='{option_2}'")
 
 if option_1=='Todos' and option_2!='Todos':
+    version_grafico='version_2'
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Servicio=='{option_2}'")
      
 
@@ -191,8 +195,13 @@ with st.container():
 
 #------------------------------------------------------------------------
 # gráfico general de resultados por indices
-graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
+if version_grafico=='version_1':
+    graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
+if version_grafico=='version_2':
+    graf1=px.bar(df_promedios_servicios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_2} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
+                 update_xaxes(title_text=None)
+
 graf1.update_layout(yaxis_tickformat='.0f',width=1000,  # Ancho del gráfico en píxeles
     height=800,)
 # Mostrar los valores sobre las barras
