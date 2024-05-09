@@ -55,9 +55,10 @@ def select_servicio(df_encuesta, option_2):
     else:
         unique_servicio = df_encuesta.query(f'Sector == "{option_2}"')['Servicio'].unique()
     Servicio = pd.DataFrame({'Servicio': unique_servicio})
-    nuevo_registro = pd.DataFrame({'Servicio': ['Todos']})
-    Servicio = pd.concat([nuevo_registro, Servicio]).Servicio.tolist()
-
+    #nuevo_registro = pd.DataFrame({'Servicio': ['Todos']})
+    #Servicio = pd.concat([nuevo_registro, Servicio]).Servicio.tolist()
+    Sector = Sector.reset_index(drop=True) # modificacion de funcion
+    Sector = Sector['Sector'].tolist() # modificacion de funcion
     return Servicio
 #-------------------------------------------------------------------------
 
