@@ -111,7 +111,7 @@ df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
 Servicios = df_encuesta[df_encuesta['Servicio'] != 'Todos']['Servicio'].unique()
 df_promedios_servicios_todos = pd.DataFrame()
 for servicio in Servicios:
-    df_promedios_servicios = df_encuesta[df_encuesta['Servicio'] == servicio].groupby('Indice')['Resultado'].mean().reset_index()
+    df_promedios_servicios = df_encuesta[(df_encuesta['Servicio'] == servicio) & (df_encuesta['Caracteristica de Comparacion'] =='Todos') & (df_encuesta['Tipo'] =='Indice')]
     df_promedios_servicios['Servicio'] = servicio
     df_promedios_servicios_todos = pd.concat([df_promedios_servicios_todos, df_promedios_servicios])
 
@@ -170,16 +170,13 @@ if option_1=='Todos' and option_2=='Todos': #1
 
 if option_1!='Todos' and option_2=='Todos':
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
-    #df_promedios_servicios_todos=df_promedios_servicios_todos[(df_promedios_servicios_todos['Sector']==[f'{option_1}'])]
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Sector=='{option_1}'")
 
 if option_1!='Todos' and option_2!='Todos':
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
-    #df_promedios_servicios_todos=df_promedios_servicios_todos[(df_promedios_servicios_todos['Servicio']=='{option_2}')]
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Servicio=='{option_2}'")
 
 if option_1=='Todos' and option_2!='Todos':
-    #df_promedios_servicios_todos=df_promedios_servicios_todos[(df_promedios_servicios_todos['Servicio']=='{option_2}')]
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Servicio=='{option_2}'")
      
 
