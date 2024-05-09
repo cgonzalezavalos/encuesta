@@ -101,7 +101,7 @@ df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
 #-------------------------------------------------------------------------
 #Promedios por Servicio
 Servicios = df_encuesta[df_encuesta['Servicio'] != 'Todos']['Servicio'].unique()
-df_promedios_servicios = pd.DataFrame()
+df_promedios_servicios_todos = pd.DataFrame()
 for servicio in Servicios:
     df_promedios_servicios = df_encuesta[df_encuesta['Servicio'] == servicio].groupby('Indice')['Resultado'].mean().reset_index()
     df_promedios_servicios['Servicio'] = servicio
