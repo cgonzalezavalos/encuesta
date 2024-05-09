@@ -178,7 +178,7 @@ if option_1=='Todos' and option_2=='Todos': #1
 if option_1!='Todos' and option_2=='Todos':
     version_grafico='version_3'
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
-    #df_promedios_todos=pd.concat([df_promedios_todos,df_todos])
+    df_promedios_todos=pd.concat([df_promedios_todos,df_todos])
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Sector=='{option_1}'")
 
 if option_1!='Todos' and option_2!='Todos':
@@ -208,10 +208,10 @@ if version_grafico=='version_1':
 if version_grafico=='version_2':
     graf1=px.bar(df_promedios_servicios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_2} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
-#if version_grafico=='version_3':
-#    graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>').\
-#        update_yaxes(visible=visible_y_axis,title_text=None).\
-#                 update_xaxes(title_text=None)
+if version_grafico=='version_3':
+    graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color='Sector', barmode='group').\
+        update_yaxes(visible=visible_y_axis,title_text=None).\
+                 update_xaxes(title_text=None)
     #,color='Sector', barmode='group'
 
 
