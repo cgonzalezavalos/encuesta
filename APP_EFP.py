@@ -175,7 +175,7 @@ if option_1=='Todos' and option_2=='Todos': #1
      df_promedios_todos=df_promedios_todos.query("Sector=='Todos'")
 
 if option_1!='Todos' and option_2=='Todos':
-    version_grafico='version_1'
+    version_grafico='version_3'
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Sector=='{option_1}'")
 
@@ -206,8 +206,13 @@ if version_grafico=='version_1':
 if version_grafico=='version_2':
     graf1=px.bar(df_promedios_servicios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_2} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
+if version_grafico=='version_3':
+    graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
+                 update_xaxes(title_text=None)
     # Agregar la serie del total nacional
-    graf1.add_bar(df_todos,x='Indice', y='Resultado', name='Total Nacional')
+    graf1.add_bar(df_todos,x='Indice', y='Resultado', name='Total Nacional',color='orange')
+
+
 
 graf1.update_layout(yaxis_tickformat='.0f',width=1000,  # Ancho del gráfico en píxeles
     height=800,)
