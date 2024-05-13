@@ -104,10 +104,10 @@ df_todos['Sector']='Administración Central'
 
 # Prpmedio todos los sectores x indice y genero
 df_indicadores_genero=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'")
-columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
-df_indicadores_genero=df_todos.drop(columns=columnas_drop)
-df_indicadores_genero['Sector']='Administración Central'
-df_indicadores_genero.rename(columns={'Valor de la Caracteristica de Comparacion':'Genero'},inplace=True)
+#columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+#df_indicadores_genero=df_todos.drop(columns=columnas_drop)
+#df_indicadores_genero['Sector']='Administración Central'
+#df_indicadores_genero.rename(columns={'Valor de la Caracteristica de Comparacion':'Genero'},inplace=True)
 
 
 #-------------------------------------------------------------------------
