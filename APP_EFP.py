@@ -246,7 +246,7 @@ if version_grafico=='version_3':
 graf1.update_layout(
     yaxis=dict(title='', tickfont=dict(size=14)),
     xaxis=dict(title='Resultado', tickfont=dict(size=14)),
-    yaxis_tickformat='.0f'
+    yaxis_tickformat='.0f',
     legend=dict(font=dict(size=14)),
     title='',
     showlegend=True,
