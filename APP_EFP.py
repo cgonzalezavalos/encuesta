@@ -295,7 +295,7 @@ if opcion_visualizacion=='Sector y Servicio':
     st.plotly_chart(graf1)
 if opcion_visualizacion=='Comparación entre maximos y mínimos':
     st.plotly_chart(graf2)
-
-st.dataframe(df_indicadores_genero)
+if opcion_visualizacion=='Comparación por sexo':
+    st.dataframe(df_indicadores_genero)
 
 
