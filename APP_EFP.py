@@ -101,6 +101,15 @@ df_todos = df_encuesta[(df_encuesta['Servicio'] == 'Todos') & (df_encuesta['Cara
 columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
 df_todos=df_todos.drop(columns=columnas_drop)
 df_todos['Sector']='Administración Central'
+
+# Prpmedio todos los sectores x indice y genero
+df_indicadores_genero=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'")
+columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+df_indicadores_genero=df_todos.drop(columns=columnas_drop)
+df_indicadores_genero['Sector']='Administración Central'
+df_indicadores_genero.rename(columns={'Valor de la Caracteristica de Comparacion':'Genero'},inplace=True)
+
+
 #-------------------------------------------------------------------------
 #Promedios por Sector
 
@@ -116,6 +125,14 @@ columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Co
 df_promedios=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
 #df_promedios_todos['Resultado']=np.round(df_promedios_todos['Resultado'],2)
+
+
+
+
+
+
+
+
 
 #-------------------------------------------------------------------------
 #Promedios por Servicio
@@ -279,6 +296,6 @@ if opcion_visualizacion=='Sector y Servicio':
 if opcion_visualizacion=='Comparación entre maximos y mínimos':
     st.plotly_chart(graf2)
 
-
+st.dataframe(df_indicadores_genero)
 
 
