@@ -35,7 +35,7 @@ st.markdown("<hr>", unsafe_allow_html=True)
 #-----------------------------------------------------------------------------------------
 
 with st.sidebar:
-    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre máximos y mínimos', 'Comparación por sexo','Comparación por rango etario' ])
+    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre máximos y mínimos', 'Comparación por sexo','Comparación por rango etario', 'Comparación por años de permanencia en el Estado'])
 
 #--------------------------------------------------------------------------
 # función para tener los datos en memoria cache
@@ -117,8 +117,12 @@ df_indicadores_rango_etario=df_indicadores_rango_etario.drop(columns=columnas_dr
 df_indicadores_rango_etario['Sector']='Administración Central'
 df_indicadores_rango_etario.rename(columns={'Valor de la Caracteristica de Comparacion':'Rango Etario'},inplace=True)
 
-#Personas de mas edad (40+ anos)
-#Personas mas jovenes (<40 anos)
+# Prpmedio todos los sectores x indice y años en el estado
+df_indicadores_años_estado=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Anos de servicio publico' & Tipo=='Indice'")
+columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+df_indicadores_años_estado=df_indicadores_años_estado.drop(columns=columnas_drop)
+df_indicadores_años_estado['Sector']='Administración Central'
+df_indicadores_años_estado.rename(columns={'Valor de la Caracteristica de Comparacion':'Permanencia en el Estado'},inplace=True)
 
 #-------------------------------------------------------------------------
 #Promedios por Sector
@@ -229,10 +233,12 @@ if option_1=='Todos' and option_2!='Todos':
 # grafico 1
 # gráfico general de resultados por indices
 if version_grafico=='version_1':
-    graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
+    graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color_discrete_map=dimension_colors).\
+        update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
 if version_grafico=='version_2':
-    graf1=px.bar(df_promedios_servicios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_2} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
+    graf1=px.bar(df_promedios_servicios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_2} por Indices</b>',color_discrete_map=dimension_colors).\
+        update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
 if version_grafico=='version_3':
     graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices entre todos los sectores y {option_1}</b>',color='Sector', barmode='group',text='Resultado').\
@@ -347,6 +353,26 @@ graf4.update_layout(
 
 #---------------------------------------------------------------------------------------
 
+# grafico 5
+
+graf5=px.bar(df_indicadores_años_estado,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y años de permanencia en la administración central</b>',color='Permanencia en el Estado', barmode='group',text='Resultado').\
+    update_yaxes(visible=visible_y_axis,title_text=None).\
+                update_xaxes(title_text=None)
+
+graf5.update_layout(
+    yaxis=dict(title='', tickfont=dict(size=14)),
+    xaxis=dict(title='Resultado', tickfont=dict(size=14)),
+    legend=dict(font=dict(size=14)),#location='top right'),
+    showlegend=True,
+    barmode='group',
+    bargap=0.15,
+    bargroupgap=0.1,
+    width=1300,  # Ancho del gráfico en píxeles
+    height=800,  # Altura del gráfico en píxeles
+)
+
+#---------------------------------------------------------------------------------------
+
 if opcion_visualizacion=='Sector y Servicio':
     st.plotly_chart(graf1)
 if opcion_visualizacion=='Comparación entre máximos y mínimos':
@@ -357,3 +383,7 @@ if opcion_visualizacion=='Comparación por sexo':
 if opcion_visualizacion=='Comparación por rango etario':
     st.plotly_chart(graf4)
     #st.dataframe(df_indicadores_rango_etario)
+if opcion_visualizacion=='Comparación por años de permanencia en el Estado':
+    st.plotly_chart(graf5)
+    st.dataframe(df_indicadores_años_estado)
+
