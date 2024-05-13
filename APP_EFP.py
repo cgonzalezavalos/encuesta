@@ -310,7 +310,24 @@ graf3.update_layout(
     width=1300,  # Ancho del gráfico en píxeles
     height=800,  # Altura del gráfico en píxeles
 )
+#---------------------------------------------------------------------------------------
+# grafico 4
 
+graf4=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y rango etario en la administración central</b>',color='Rango Etario', barmode='group',text='Resultado').\
+    update_yaxes(visible=visible_y_axis,title_text=None).\
+                update_xaxes(title_text=None)
+
+graf4.update_layout(
+    yaxis=dict(title='', tickfont=dict(size=14)),
+    xaxis=dict(title='Resultado', tickfont=dict(size=14)),
+    legend=dict(font=dict(size=14)),#location='top right'),
+    showlegend=True,
+    barmode='group',
+    bargap=0.15,
+    bargroupgap=0.1,
+    width=1300,  # Ancho del gráfico en píxeles
+    height=800,  # Altura del gráfico en píxeles
+)
 
 #---------------------------------------------------------------------------------------
 
@@ -322,4 +339,5 @@ if opcion_visualizacion=='Comparación por sexo':
     st.plotly_chart(graf3)
     st.dataframe(df_indicadores_genero)
 if opcion_visualizacion=='Comparación por rango etario':
+    st.plotly_chart(graf4)
     st.dataframe(df_indicadores_rango_etario)
