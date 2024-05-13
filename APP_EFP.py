@@ -337,7 +337,7 @@ if opcion_visualizacion=='Comparación entre maximos y mínimos':
     st.plotly_chart(graf2)
 if opcion_visualizacion=='Comparación por sexo':
     st.plotly_chart(graf3)
-    st.dataframe(df_indicadores_genero)
+    #st.dataframe(df_indicadores_genero)
 if opcion_visualizacion=='Comparación por rango etario':
     st.plotly_chart(graf4)
-    st.dataframe(df_indicadores_rango_etario)
+    #st.dataframe(df_indicadores_rango_etario)
