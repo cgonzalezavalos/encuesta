@@ -301,7 +301,6 @@ graf3.update_layout(
     yaxis=dict(title='', tickfont=dict(size=14)),
     xaxis=dict(title='Resultado', tickfont=dict(size=14)),
     legend=dict(font=dict(size=14)),
-    title='',
     showlegend=True,
     barmode='group',
     bargap=0.15,
