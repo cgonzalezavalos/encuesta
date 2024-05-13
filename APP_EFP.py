@@ -302,7 +302,7 @@ graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparaci
 graf3.update_layout(
     yaxis=dict(title='', tickfont=dict(size=14)),
     xaxis=dict(title='Resultado', tickfont=dict(size=14)),
-    legend=dict(font=dict(size=14),location='top right'),
+    legend=dict(font=dict(size=14),#location='top right'),
     showlegend=True,
     barmode='group',
     bargap=0.15,
