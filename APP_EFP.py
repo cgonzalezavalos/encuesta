@@ -293,9 +293,22 @@ for index, row in df_max_min.iterrows():
 #---------------------------------------------------------------------------------------
 # grafico 3
 
-graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices entre todos los sectores y {option_1}</b>',color='Genero', barmode='group',text='Resultado').\
+graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y género en la administración central</b>',color='Genero', barmode='group',text='Resultado').\
     update_yaxes(visible=visible_y_axis,title_text=None).\
                 update_xaxes(title_text=None)
+
+graf3.update_layout(
+    yaxis=dict(title='', tickfont=dict(size=14)),
+    xaxis=dict(title='Resultado', tickfont=dict(size=14)),
+    legend=dict(font=dict(size=14)),
+    title='',
+    showlegend=True,
+    barmode='group',
+    bargap=0.15,
+    bargroupgap=0.1,
+    width=1800,  # Ancho del gráfico en píxeles
+    height=1300,  # Altura del gráfico en píxeles
+)
 
 
 #---------------------------------------------------------------------------------------
