@@ -35,7 +35,7 @@ st.markdown("<hr>", unsafe_allow_html=True)
 #-----------------------------------------------------------------------------------------
 
 with st.sidebar:
-    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre maximos y mínimos', 'Comparación por sexo','Comparación por rango etario' ])
+    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre máximos y mínimos', 'Comparación por sexo','Comparación por rango etario' ])
 
 #--------------------------------------------------------------------------
 # función para tener los datos en memoria cache
@@ -333,7 +333,7 @@ graf4.update_layout(
 
 if opcion_visualizacion=='Sector y Servicio':
     st.plotly_chart(graf1)
-if opcion_visualizacion=='Comparación entre maximos y mínimos':
+if opcion_visualizacion=='Comparación entre máximos y mínimos':
     st.plotly_chart(graf2)
 if opcion_visualizacion=='Comparación por sexo':
     st.plotly_chart(graf3)
