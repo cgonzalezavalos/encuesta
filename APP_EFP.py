@@ -224,6 +224,7 @@ if option_1=='Todos' and option_2!='Todos':
 
 
 #------------------------------------------------------------------------
+# grafico 1
 # gráfico general de resultados por indices
 if version_grafico=='version_1':
     graf1=px.bar(df_promedios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_1} por Indices</b>',color_discrete_map=dimension_colors).update_yaxes(visible=visible_y_axis,title_text=None).\
@@ -237,14 +238,13 @@ if version_grafico=='version_3':
                  update_xaxes(title_text=None)
     #,color='Sector', barmode='group'
 
-
-
 graf1.update_layout(yaxis_tickformat='.0f',width=1000,  # Ancho del gráfico en píxeles
     height=800,)
 # Mostrar los valores sobre las barras
 #graf1.update_traces(text=graf1.data[0]['y'], texttemplate='%{text:.0f}', textposition='outside')
 
-#------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------
+# grafico 2
 # Definir un diccionario de colores para las categorías
 categoria_colors = {
     'Minimo': 'orange',
@@ -290,12 +290,22 @@ for index, row in df_max_min.iterrows():
     )
     
     y_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
+#---------------------------------------------------------------------------------------
+# grafico 3
+
+graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices entre todos los sectores y {option_1}</b>',color='Genero', barmode='group',text='Resultado').\
+    update_yaxes(visible=visible_y_axis,title_text=None).\
+                update_xaxes(title_text=None)
+
+
+#---------------------------------------------------------------------------------------
 
 if opcion_visualizacion=='Sector y Servicio':
     st.plotly_chart(graf1)
 if opcion_visualizacion=='Comparación entre maximos y mínimos':
     st.plotly_chart(graf2)
 if opcion_visualizacion=='Comparación por sexo':
+    st.plotly_chart(graf3)
     st.dataframe(df_indicadores_genero)
 
 
