@@ -313,7 +313,7 @@ graf3.update_layout(
 #---------------------------------------------------------------------------------------
 # grafico 4
 
-graf4=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y rango etario en la administración central</b>',color='Rango Etario', barmode='group',text='Resultado').\
+graf4=px.bar(df_indicadores_rango_etario,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y rango etario en la administración central</b>',color='Rango Etario', barmode='group',text='Resultado').\
     update_yaxes(visible=visible_y_axis,title_text=None).\
                 update_xaxes(title_text=None)
 
