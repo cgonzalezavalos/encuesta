@@ -110,6 +110,16 @@ df_indicadores_genero['Sector']='Administración Central'
 df_indicadores_genero.rename(columns={'Valor de la Caracteristica de Comparacion':'Genero'},inplace=True)
 
 
+# Prpmedio todos los sectores x indice y rango etario
+df_indicadores_rango_etario=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Edad' & Tipo=='Indice'")
+columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+df_indicadores_rango_etario=df_indicadores_rango_etario.drop(columns=columnas_drop)
+df_indicadores_rango_etario['Sector']='Administración Central'
+df_indicadores_rango_etario.rename(columns={'Valor de la Caracteristica de Comparacion':'Rango Etario'},inplace=True)
+
+#Personas de mas edad (40+ anos)
+#Personas mas jovenes (<40 anos)
+
 #-------------------------------------------------------------------------
 #Promedios por Sector
 
@@ -125,14 +135,6 @@ columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Co
 df_promedios=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
 #df_promedios_todos['Resultado']=np.round(df_promedios_todos['Resultado'],2)
-
-
-
-
-
-
-
-
 
 #-------------------------------------------------------------------------
 #Promedios por Servicio
@@ -300,7 +302,7 @@ graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparaci
 graf3.update_layout(
     yaxis=dict(title='', tickfont=dict(size=14)),
     xaxis=dict(title='Resultado', tickfont=dict(size=14)),
-    legend=dict(font=dict(size=14)),
+    legend=dict(font=dict(size=14),location='top right'),
     showlegend=True,
     barmode='group',
     bargap=0.15,
@@ -319,5 +321,5 @@ if opcion_visualizacion=='Comparación entre maximos y mínimos':
 if opcion_visualizacion=='Comparación por sexo':
     st.plotly_chart(graf3)
     st.dataframe(df_indicadores_genero)
-
-
+if opcion_visualizacion=='Comparación por rango etario':
+    st.dataframe(df_indicadores_rango_etario)
