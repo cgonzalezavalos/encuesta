@@ -35,7 +35,7 @@ st.markdown("<hr>", unsafe_allow_html=True)
 #-----------------------------------------------------------------------------------------
 
 with st.sidebar:
-    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre máximos y mínimos', 'Comparación por sexo','Comparación por rango etario', 'Comparación por años de permanencia en el Estado'])
+    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre máximos y mínimos', 'Comparación por sexo','Comparación por rango etario', 'Comparación por años de permanencia en el Estado','Comparación por nivel educativo'])
 
 #--------------------------------------------------------------------------
 # función para tener los datos en memoria cache
@@ -123,6 +123,13 @@ columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servi
 df_indicadores_años_estado=df_indicadores_años_estado.drop(columns=columnas_drop)
 df_indicadores_años_estado['Sector']='Administración Central'
 df_indicadores_años_estado.rename(columns={'Valor de la Caracteristica de Comparacion':'Permanencia en el Estado'},inplace=True)
+
+# Prpmedio todos los sectores x indice y Nivel educativo
+df_indicadores_nivel_educativo=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Nivel educativo' & Tipo=='Indice'")
+columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+df_indicadores_nivel_educativo=df_indicadores_nivel_educativo.drop(columns=columnas_drop)
+df_indicadores_nivel_educativo['Sector']='Administración Central'
+df_indicadores_nivel_educativo.rename(columns={'Valor de la Caracteristica de Comparacion':'Nivel educativo'},inplace=True)
 
 #-------------------------------------------------------------------------
 #Promedios por Sector
@@ -370,7 +377,25 @@ graf5.update_layout(
     width=1300,  # Ancho del gráfico en píxeles
     height=800,  # Altura del gráfico en píxeles
 )
+#---------------------------------------------------------------------------------------
 
+# grafico 6
+
+graf6=px.bar(df_indicadores_nivel_educativo,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y nivel educativo</b>',color='Nivel educativo', barmode='group',text='Resultado').\
+    update_yaxes(visible=visible_y_axis,title_text=None).\
+                update_xaxes(title_text=None)
+
+graf6.update_layout(
+    yaxis=dict(title='', tickfont=dict(size=14)),
+    xaxis=dict(title='Resultado', tickfont=dict(size=14)),
+    legend=dict(font=dict(size=14)),#location='top right'),
+    showlegend=True,
+    barmode='group',
+    bargap=0.15,
+    bargroupgap=0.1,
+    width=1300,  # Ancho del gráfico en píxeles
+    height=800,  # Altura del gráfico en píxeles
+)
 #---------------------------------------------------------------------------------------
 
 if opcion_visualizacion=='Sector y Servicio':
@@ -385,5 +410,7 @@ if opcion_visualizacion=='Comparación por rango etario':
     #st.dataframe(df_indicadores_rango_etario)
 if opcion_visualizacion=='Comparación por años de permanencia en el Estado':
     st.plotly_chart(graf5)
-    st.dataframe(df_indicadores_años_estado)
+    #st.dataframe(df_indicadores_años_estado)
+if opcion_visualizacion=='Comparación por nivel educativo':
+    st.plotly_chart(graf6)
 
