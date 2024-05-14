@@ -35,7 +35,7 @@ st.markdown("<hr>", unsafe_allow_html=True)
 #-----------------------------------------------------------------------------------------
 
 with st.sidebar:
-    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre máximos y mínimos', 'Comparación por sexo','Comparación por rango etario', 'Comparación por años de permanencia en el Estado','Comparación por nivel educativo','Comparación por tipo de contrato'])
+    opcion_visualizacion=st.radio('Ver resultados por',['Sector y Servicio','Comparación entre máximos y mínimos', 'Comparación por sexo','Comparación por rango etario', 'Comparación por años de permanencia en el Estado','Comparación por nivel educativo','Comparación por tipo de contrato','Comparación por estamento'])
 
 #--------------------------------------------------------------------------
 # función para tener los datos en memoria cache
@@ -137,6 +137,13 @@ columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servi
 df_indicadores_tipo_contrato=df_indicadores_tipo_contrato.drop(columns=columnas_drop)
 df_indicadores_tipo_contrato['Sector']='Administración Central'
 df_indicadores_tipo_contrato.rename(columns={'Valor de la Caracteristica de Comparacion':'Tipo de contrato'},inplace=True)
+
+# Prpmedio todos los sectores x indice y estamento
+df_indicadores_estamento=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Estamento' & Tipo=='Indice'")
+columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+df_indicadores_estamento=df_indicadores_estamento.drop(columns=columnas_drop)
+df_indicadores_estamento['Sector']='Administración Central'
+df_indicadores_estamento.rename(columns={'Valor de la Caracteristica de Comparacion':'Estamento'},inplace=True)
 
 #-------------------------------------------------------------------------
 #Promedios por Sector
@@ -406,13 +413,32 @@ graf6.update_layout(
 
 #---------------------------------------------------------------------------------------
 
-# grafico 6
+# grafico 7
 
 graf7=px.bar(df_indicadores_tipo_contrato,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y tipo de contrato</b>',color='Tipo de contrato', barmode='group',text='Resultado').\
     update_yaxes(visible=visible_y_axis,title_text=None).\
                 update_xaxes(title_text=None)
 
 graf7.update_layout(
+    yaxis=dict(title='', tickfont=dict(size=14)),
+    xaxis=dict(title='Resultado', tickfont=dict(size=14)),
+    legend=dict(font=dict(size=14)),#location='top right'),
+    showlegend=True,
+    barmode='group',
+    bargap=0.15,
+    bargroupgap=0.1,
+    width=1300,  # Ancho del gráfico en píxeles
+    height=800,  # Altura del gráfico en píxeles
+)
+#---------------------------------------------------------------------------------------
+
+# grafico 8
+
+graf8=px.bar(df_indicadores_estamento,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y tipo de contrato</b>',color='Estamento', barmode='group',text='Resultado').\
+    update_yaxes(visible=visible_y_axis,title_text=None).\
+                update_xaxes(title_text=None)
+
+graf8.update_layout(
     yaxis=dict(title='', tickfont=dict(size=14)),
     xaxis=dict(title='Resultado', tickfont=dict(size=14)),
     legend=dict(font=dict(size=14)),#location='top right'),
@@ -442,4 +468,6 @@ if opcion_visualizacion=='Comparación por nivel educativo':
     st.plotly_chart(graf6)
 if opcion_visualizacion=='Comparación por tipo de contrato':
     st.plotly_chart(graf7)
+if opcion_visualizacion=='Comparación por estamento':
+    st.plotly_chart(graf8)
 #Tipo de contrato
