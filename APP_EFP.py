@@ -485,7 +485,7 @@ graf9.update_layout(
 
 # grafico 9
 
-graf10=px.bar(df_indicadores_discapacidad,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y pertenencia a pueblos originarios</b>',color='Pueblos originarios', barmode='group',text='Resultado').\
+graf10=px.bar(df_indicadores_pueblos_originarios,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y pertenencia a pueblos originarios</b>',color='Pueblos originarios', barmode='group',text='Resultado').\
     update_yaxes(visible=visible_y_axis,title_text=None).\
                 update_xaxes(title_text=None)
 
