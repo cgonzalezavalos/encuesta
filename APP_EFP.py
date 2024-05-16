@@ -234,7 +234,7 @@ with st.container(): # container de visualizacion de filtros
       with col1:
           option_1 = st.selectbox('Sector',Sector)
       with col2:
-          option_2 = st.selectbox('Servicio',select_servicio(df_encuesta,option_1),disable=visualizacion_filtro_servicos)
+          option_2 = st.selectbox('Servicio',select_servicio(df_encuesta,option_1),disabled=visualizacion_filtro_servicos)
 
 #-------------------------------------------------------------------------
 
