@@ -298,6 +298,8 @@ if option_1=='Todos' and option_2!='Todos':
      
 if opcion_visualizacion=='Comparación entre máximos y mínimos' and option_1!='Todos':
     df_max_min=min_max_servicio(option_1)
+else:
+    df_max_min
 
 # with st.container():
 #     col1,col2,col3=st.columns(3)
