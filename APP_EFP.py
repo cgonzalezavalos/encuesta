@@ -224,18 +224,16 @@ df_max_min['Row_number'] = np.where(df_max_min.reset_index().index==0,0,df_max_m
 #df_max_min
 
 #-------------------------------------------------------------------------
-with st.container(): # container de visualizacion de filtros
-  if opcion_visualizacion!='Comparación entre máximos y mínimos':
-            col1,col2=st.columns(2,gap="large")
-            with col1:
-                option_1 = st.selectbox('Sector',Sector)
-            with col2:
-                option_2 = st.selectbox('Servicio',select_servicio(df_encuesta,option_1))
+if opcion_visualizacion!='Comparación entre máximos y mínimos':
+    visualizacion_filtro_servicos=False
   else:
-            col1,col2=st.columns(2,gap="large")
-            with col1:
-                option_1 = st.selectbox('Sector',Sector)
-            with col2:
+    visualizacion_filtro_servicos=True
+with st.container(): # container de visualizacion de filtros
+      col1,col2=st.columns(2,gap="large")
+      with col1:
+          option_1 = st.selectbox('Sector',Sector)
+      with col2:
+          option_2 = st.selectbox('Servicio',select_servicio(df_encuesta,option_1),disable=visualizacion_filtro_servicos)
 
 #-------------------------------------------------------------------------
 
