@@ -224,12 +224,18 @@ df_max_min['Row_number'] = np.where(df_max_min.reset_index().index==0,0,df_max_m
 #df_max_min
 
 #-------------------------------------------------------------------------
-with st.container():
+with st.container(): # container de visualizacion de filtros
+  if opcion_visualizacion!='Comparación entre máximos y mínimos':
             col1,col2=st.columns(2,gap="large")
             with col1:
                 option_1 = st.selectbox('Sector',Sector)
             with col2:
                 option_2 = st.selectbox('Servicio',select_servicio(df_encuesta,option_1))
+  else:
+            col1,col2=st.columns(2,gap="large")
+            with col1:
+                option_1 = st.selectbox('Sector',Sector)
+            with col2:
 
 #-------------------------------------------------------------------------
 
@@ -509,8 +515,8 @@ graf10.update_layout(
 
 if opcion_visualizacion=='Sector y Servicio':
     st.plotly_chart(graf1)
-    st.dataframe(df_promedios_todos)
-    st.dataframe(df_promedios_servicios_todos)
+    # st.dataframe(df_promedios_todos)
+    # st.dataframe(df_promedios_servicios_todos)
 if opcion_visualizacion=='Comparación entre máximos y mínimos':
     st.plotly_chart(graf2)
 if opcion_visualizacion=='Comparación por sexo':
