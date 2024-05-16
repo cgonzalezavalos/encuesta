@@ -505,6 +505,8 @@ graf10.update_layout(
 
 if opcion_visualizacion=='Sector y Servicio':
     st.plotly_chart(graf1)
+    st.dataframe(df_promedios_todos)
+    st.dataframe(df_promedios_servicios_todos)
 if opcion_visualizacion=='Comparación entre máximos y mínimos':
     st.plotly_chart(graf2)
 if opcion_visualizacion=='Comparación por sexo':
