@@ -226,8 +226,9 @@ df_max_min['Row_number'] = np.where(df_max_min.reset_index().index==0,0,df_max_m
 #-------------------------------------------------------------------------
 if opcion_visualizacion!='Comparación entre máximos y mínimos':
     visualizacion_filtro_servicos=False
-  else:
+else:
     visualizacion_filtro_servicos=True
+  
 with st.container(): # container de visualizacion de filtros
       col1,col2=st.columns(2,gap="large")
       with col1:
