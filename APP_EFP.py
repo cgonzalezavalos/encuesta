@@ -603,20 +603,20 @@ graf11.update_layout(
      height=1000,  # Altura del gráfico en píxeles
  )
 
-# ## Agregar etiquetas
-x_shift = 0  # Variable para ajustar la posición horizontal de las anotaciones
-for index, row in df_indicadores_min_max.iterrows():
-    # Agregar etiqueta
-    graf11.add_annotation(
-        #x=row['Resultado'], y=row['Row_number'], text=row['Servicio'],
-        x=row['Row_number'], y=100, text=row['Servicio'],
-        font=dict(size=14, color=categoria_colors[row['Categoria']]),
-        showarrow=False,
-        yshift=100,
-        xshift=x_shift,  # Ajuste vertical
-    )
+# # ## Agregar etiquetas
+# x_shift = 0  # Variable para ajustar la posición horizontal de las anotaciones
+# for index, row in df_indicadores_min_max.iterrows():
+#     # Agregar etiqueta
+#     graf11.add_annotation(
+#         #x=row['Resultado'], y=row['Row_number'], text=row['Servicio'],
+#         x=row['Row_number'], y=100, text=row['Servicio'],
+#         font=dict(size=14, color=categoria_colors[row['Categoria']]),
+#         showarrow=False,
+#         yshift=100,
+#         xshift=x_shift,  # Ajuste vertical
+#     )
     
-    x_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
+#     x_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
 #---------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------
 
