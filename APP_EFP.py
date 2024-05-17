@@ -625,7 +625,7 @@ if opcion_visualizacion=='Comparación entre máximos y mínimos':
         else: 
             st.markdown(f'<h3>Comparación de resultados de indicadores con mejores y peores resultados entre servicios públicos del {option_1}</h3>', unsafe_allow_html=True)
         st.plotly_chart(graf11)
-        st.dataframe(df_indicadores_min_max)
+    st.dataframe(df_indicadores_min_max)
 if opcion_visualizacion=='Comparación por sexo':
     st.plotly_chart(graf3)
     #st.dataframe(df_indicadores_genero)
