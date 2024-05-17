@@ -572,6 +572,7 @@ graf10.update_layout(
 #---------------------------------------------------------------------------------------
 # grafico 11
 df_indicadores_min_max=indicadores_min_max(option_1).sort_values(by=['Categoria','Resultado'],ascending=[False,True])
+df_indicadores_min_max['Row_number'] = np.where(df_indicadores_min_max.reset_index().index==0,0,df_indicadores_min_max.reset_index().index*0.5)-0.3
 # Crear una lista de colores basada en la paleta definida en category_colors
 colors = [categoria_colors[c] for c in df_indicadores_min_max['Categoria'].unique()]
 # Crear el gráfico con Plotly Express
@@ -594,19 +595,16 @@ graf11.update_layout(
  )
 
 # ## Agregar etiquetas
-# y_shift = 0  # Variable para ajustar la posición vertical de las anotaciones
+x_shift = 100  # Variable para ajustar la posición vertical de las anotaciones
 # for index, row in df_indicadores_min_max.iterrows():
-    
-#     # Agregar etiqueta
-#     graf11.add_annotation(
-#         x=100, y=row['Row_number'], text=row['Servicio'],
+graf11.add_annotation(
+         x=row['Row_number'], y=100, text=row['Servicio'],
 #         font=dict(size=14, color=categoria_colors[row['Categoria']]),
 #         showarrow=False,
 #         xshift=300,
 #         yshift=y_shift,  # Ajuste vertical
-#     )
-    
-#     y_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
+    )
+x_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
 #---------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------
 
