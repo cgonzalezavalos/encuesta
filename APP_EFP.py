@@ -559,7 +559,7 @@ if opcion_visualizacion=='Sector y Servicio':
     # st.dataframe(df_promedios_servicios_todos)
 if opcion_visualizacion=='Comparación entre máximos y mínimos':
     st.plotly_chart(graf2)
-    st.text(paso)
+    st.text(f'{paso} - {option_1}')
     st.dataframe(df_max_min)
 if opcion_visualizacion=='Comparación por sexo':
     st.plotly_chart(graf3)
