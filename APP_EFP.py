@@ -582,7 +582,7 @@ graf11 = px.bar(df_indicadores_min_max, x='Indicador', y='Resultado', color='Cat
 # graf11.update_traces(marker_line_color='rgb(8,48,107)', marker_line_width=1.5, opacity=0.6)
 
 graf11.update_layout(
-     xaxis=dict(title='', tickfont=dict(size=14)),
+     xaxis=dict(title='', tickfont=dict(size=14),rotate=90),
      yaxis=dict(title='Resultado', tickfont=dict(size=14)),
 #     legend=dict(font=dict(size=14)),
      title='',
@@ -625,6 +625,7 @@ if opcion_visualizacion=='Comparación entre máximos y mínimos':
         else: 
             st.markdown(f'<h3>Comparación de resultados de indicadores con mejores y peores resultados entre servicios públicos del {option_1}</h3>', unsafe_allow_html=True)
         st.plotly_chart(graf11)
+        st.dataframe(df_indicadores_min_max)
 if opcion_visualizacion=='Comparación por sexo':
     st.plotly_chart(graf3)
     #st.dataframe(df_indicadores_genero)
