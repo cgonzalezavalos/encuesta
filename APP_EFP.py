@@ -231,7 +231,10 @@ def min_max_sector(option_1):
     Servicio_Minimo=[]
     Indice=[]
     for indice in indices:
-        datos_x_indice=df_encuesta.query(f"Sector=='{option_1}' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice' & Indice=='{indice}' & Resultado!='Respuentas Insuffientes (<10)'")
+        if option_1!='Todos':
+            datos_x_indice=df_encuesta.query(f"Sector=='{option_1}' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice' & Indice=='{indice}' & Resultado!='Respuentas Insuffientes (<10)'")
+        else:
+            datos_x_indice=df_encuesta.query(f"Servicio!='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice' & Indice=='{indice}' & Resultado!='Respuentas Insuffientes (<10)'")
         for i in range(datos_x_indice.shape[0]):
             if i==0:
                 ResultadoMaximo=datos_x_indice.iloc[i]['Resultado']
