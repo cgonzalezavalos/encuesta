@@ -580,18 +580,18 @@ graf11 = px.bar(df_indicadores_min_max, x='Indicador', y='Resultado', color='Cat
 # # Personalizar el gráfico
 # graf11.update_traces(marker_line_color='rgb(8,48,107)', marker_line_width=1.5, opacity=0.6)
 
-# graf11.update_layout(
-#     yaxis=dict(title='', tickfont=dict(size=14)),
-#     xaxis=dict(title='Resultado', tickfont=dict(size=14)),
+graf11.update_layout(
+     xaxis=dict(title='', tickfont=dict(size=14)),
+     yaxis=dict(title='Resultado', tickfont=dict(size=14)),
 #     legend=dict(font=dict(size=14)),
-#     title='',
+     title='',
 #     showlegend=True,
 #     barmode='group',
 #     bargap=0.15,
 #     bargroupgap=0.1,
 #     width=1400,  # Ancho del gráfico en píxeles
 #     height=1000,  # Altura del gráfico en píxeles
-# )
+ )
 
 # ## Agregar etiquetas
 # y_shift = 0  # Variable para ajustar la posición vertical de las anotaciones
