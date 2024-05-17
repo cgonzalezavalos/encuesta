@@ -189,40 +189,6 @@ df_promedios_servicios_todos=pd.concat([df_promedios_servicios_todos, df_promedi
 #df_promedios_servicios_todos=pd.merge(df_promedios_servicios_todos,df_mt_servicios,on='Servicio',how='left')
 
 #-------------------------------------------------------------------------
-# indices=df_encuesta['Indice'].unique()
-# Maximo=[]
-# Minimo=[]
-# Servicio_Maximo=[]
-# Servicio_Minimo=[]
-# Indice=[]
-# for indice in indices:
-#     datos_x_indice=df_encuesta.query(f"Servicio!='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice' & Indice=='{indice}' & Resultado!='Respuentas Insuffientes (<10)'")
-#     for i in range(datos_x_indice.shape[0]):
-#         if i==0:
-#             ResultadoMaximo=datos_x_indice.iloc[i]['Resultado']
-#             ServicioMaximo=datos_x_indice.iloc[i]['Servicio']
-#             ResultadoMinimo=datos_x_indice.iloc[i]['Resultado']
-#         else:
-#             if datos_x_indice.iloc[i]['Resultado']>ResultadoMaximo:
-#                 ResultadoMaximo=datos_x_indice.iloc[i]['Resultado']
-#                 ServicioMaximo=datos_x_indice.iloc[i]['Servicio']
-#             if datos_x_indice.iloc[i]['Resultado']<ResultadoMinimo:
-#                 ResultadoMinimo=datos_x_indice.iloc[i]['Resultado']
-#                 ServicioMinimo=datos_x_indice.iloc[i]['Servicio']
-#     #display(f"El servicio con mayor {indice} es {ServicioMaximo} con {ResultadoMaximo}")
-#     #display(f"El servicio con menor {indice} es {ServicioMinimo} con {ResultadoMinimo}")
-#     Maximo.append(ResultadoMaximo)
-#     Minimo.append(ResultadoMinimo)
-#     Servicio_Maximo.append(ServicioMaximo)
-#     Servicio_Minimo.append(ServicioMinimo)
-#     Indice.append(indice)
-# df_max=pd.DataFrame({'Indice':Indice,'Categoria':'Maximo','Resultado':Maximo,'Servicio':Servicio_Maximo})
-# df_min=pd.DataFrame({'Indice':Indice,'Categoria':'Minimo','Resultado':Minimo,'Servicio':Servicio_Minimo})
-# df_max_min=pd.concat([df_max,df_min])
-# df_max_min.sort_values(by=['Indice','Categoria'],inplace=True)
-# df_max_min['Row_number'] = np.where(df_max_min.reset_index().index==0,0,df_max_min.reset_index().index*0.5)-0.3
-# #df_max_min
-
 def min_max_sector(option_1):
     indices=df_encuesta['Indice'].unique()
     Maximo=[]
