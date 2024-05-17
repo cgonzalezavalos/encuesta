@@ -571,7 +571,7 @@ graf10.update_layout(
 
 #---------------------------------------------------------------------------------------
 # grafico 11
-df_indicadores_min_max=indicadores_min_max(option_1).sort_values(by=['Indicador','Categoria'],ascending=False)
+df_indicadores_min_max=indicadores_min_max(option_1).sort_values(by=['Resultado','Categoria'],ascending=False)
 # Crear una lista de colores basada en la paleta definida en category_colors
 colors = [categoria_colors[c] for c in df_indicadores_min_max['Categoria'].unique()]
 # Crear el gráfico con Plotly Express
