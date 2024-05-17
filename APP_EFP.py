@@ -562,9 +562,9 @@ if opcion_visualizacion=='Sector y Servicio':
     # st.dataframe(df_promedios_servicios_todos)
 if opcion_visualizacion=='Comparación entre máximos y mínimos':
     if option_1=="Todos":
-        st.markdown(f'<h1>Comparación de resultados por indices entre servicios públicos de todos los sectores</h1>', unsafe_allow_html=True)
+        st.markdown(f'<h3>Comparación de resultados por indices entre servicios públicos de todos los sectores</h3>', unsafe_allow_html=True)
     else: 
-        st.markdown(f'<h1>Comparación de resultados por indices entre servicios públicos del {option_1}</h1>', unsafe_allow_html=True)
+        st.markdown(f'<h3>Comparación de resultados por indices entre servicios públicos del {option_1}</h3>', unsafe_allow_html=True)
     st.plotly_chart(graf2)
 if opcion_visualizacion=='Comparación por sexo':
     st.plotly_chart(graf3)
