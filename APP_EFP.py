@@ -262,6 +262,22 @@ def min_max_sector(option_1):
 
 
 #-------------------------------------------------------------------------
+
+def indicadores_min_max(option_1):
+    data_indicadores=df_encuesta.query(f"Sector=='{option_1}' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indicador' & Resultado!='Respuentas Insuffientes (<10)'")
+    data_indicadores_min = data_indicadores.sort_values(by=['Resultado'], ascending=True).head(10)
+    data_indicadores_max = data_indicadores.sort_values(by=['Resultado'], ascending=False).head(10)
+    data_indicadores_min['Categoria']='Minimo'
+    data_indicadores_max['Categoria']='Maximo'
+    data_indicadores_min_max=pd.concat([data_indicadores_min,data_indicadores_max])
+    return data_indicadores_min_max
+
+
+#-------------------------------------------------------------------------
+
+
+
+
 if opcion_visualizacion!='Comparación entre máximos y mínimos':
     visualizacion_filtro_servicos=False
 else:
@@ -363,7 +379,6 @@ categoria_colors = {
 }
 # Crear una lista de colores basada en la paleta definida en category_colors
 colors = [categoria_colors[c] for c in df_max_min['Categoria'].unique()]
-
 
 # Crear el gráfico con Plotly Express
 graf2 = px.bar(df_max_min, y='Indice', x='Resultado', color='Categoria', color_discrete_map=categoria_colors,title='<b>Servicios con mayor y menor resultado por indice</b>')
@@ -555,17 +570,61 @@ graf10.update_layout(
 )
 
 #---------------------------------------------------------------------------------------
+# grafico 11
+# Crear el gráfico con Plotly Express
+df_indicadores_min_max=indicadores_min_max(option_1)
+graf11 = px.bar(df_indicadores_min_max, y='Indicador', x='Resultado', color='Categoria', color_discrete_map=categoria_colors,title='<b>Servicios con mayor y menor resultado por indicador</b>')
+
+# Personalizar el gráfico
+graf11.update_traces(marker_line_color='rgb(8,48,107)', marker_line_width=1.5, opacity=0.6)
+
+graf11.update_layout(
+    yaxis=dict(title='', tickfont=dict(size=14)),
+    xaxis=dict(title='Resultado', tickfont=dict(size=14)),
+    legend=dict(font=dict(size=14)),
+    title='',
+    showlegend=True,
+    barmode='group',
+    bargap=0.15,
+    bargroupgap=0.1,
+    width=1400,  # Ancho del gráfico en píxeles
+    height=1000,  # Altura del gráfico en píxeles
+)
+
+## Agregar etiquetas
+y_shift = 0  # Variable para ajustar la posición vertical de las anotaciones
+for index, row in df_indicadores_min_max.iterrows():
+    
+    # Agregar etiqueta
+    graf11.add_annotation(
+        x=100, y=row['Row_number'], text=row['Servicio'],
+        font=dict(size=14, color=categoria_colors[row['Categoria']]),
+        showarrow=False,
+        xshift=300,
+        yshift=y_shift,  # Ajuste vertical
+    )
+    
+    y_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
+#---------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------
 
 if opcion_visualizacion=='Sector y Servicio':
     st.plotly_chart(graf1)
     # st.dataframe(df_promedios_todos)
     # st.dataframe(df_promedios_servicios_todos)
 if opcion_visualizacion=='Comparación entre máximos y mínimos':
-    if option_1=="Todos":
-        st.markdown(f'<h3>Comparación de resultados por indices entre servicios públicos de todos los sectores</h3>', unsafe_allow_html=True)
-    else: 
-        st.markdown(f'<h3>Comparación de resultados por indices entre servicios públicos del {option_1}</h3>', unsafe_allow_html=True)
-    st.plotly_chart(graf2)
+    with st.container():
+        if option_1=="Todos":
+            st.markdown(f'<h3>Comparación de resultados por indices entre servicios públicos de todos los sectores</h3>', unsafe_allow_html=True)
+        else: 
+            st.markdown(f'<h3>Comparación de resultados por indices entre servicios públicos del {option_1}</h3>', unsafe_allow_html=True)
+        st.plotly_chart(graf2)
+    with st.container():
+        if option_1=="Todos":
+            st.markdown(f'<h3>Comparación de resultados de indicadores con mejores y peores resultados entre servicios públicos de todos los sectores</h3>', unsafe_allow_html=True)
+        else: 
+            st.markdown(f'<h3>Comparación de resultados de indicadores con mejores y peores resultados entre servicios públicos del {option_1}</h3>', unsafe_allow_html=True)
+        st.plotly_chart(graf11)
 if opcion_visualizacion=='Comparación por sexo':
     st.plotly_chart(graf3)
     #st.dataframe(df_indicadores_genero)
