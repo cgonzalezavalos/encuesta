@@ -251,10 +251,10 @@ def min_max_servicio(option_1):
         Indice.append(indice)
     df_max=pd.DataFrame({'Indice':Indice,'Categoria':'Maximo','Resultado':Maximo,'Servicio':Servicio_Maximo})
     df_min=pd.DataFrame({'Indice':Indice,'Categoria':'Minimo','Resultado':Minimo,'Servicio':Servicio_Minimo})
-    df_max_min_sector=pd.concat([df_max,df_min])
-    df_max_min_sector.sort_values(by=['Indice','Categoria'],inplace=True)
-    df_max_min_sector['Row_number'] = np.where(df_max_min_sector.reset_index().index==0,0,df_max_min_sector.reset_index().index*0.5)-0.3
-    return df_max_min_sector
+    data_max_min_sector=pd.concat([df_max,df_min])
+    data_max_min_sector.sort_values(by=['Indice','Categoria'],inplace=True)
+    data_max_min_sector['Row_number'] = np.where(data_max_min_sector.reset_index().index==0,0,data_max_min_sector.reset_index().index*0.5)-0.3
+    return data_max_min_sector
 
 
 
