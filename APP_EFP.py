@@ -264,11 +264,20 @@ def min_max_sector(option_1):
 #-------------------------------------------------------------------------
 
 def indicadores_min_max(option_1):
-    data_indicadores=df_encuesta.query(f"Sector=='{option_1}' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indicador' & Resultado!='Respuentas Insuffientes (<10)'")
-    data_indicadores_min = data_indicadores.sort_values(by=['Resultado'], ascending=True).head(10)
-    data_indicadores_max = data_indicadores.sort_values(by=['Resultado'], ascending=False).head(10)
+    df_min=df_encuesta.query(f"Sector=='{option_1}' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indicador' & Resultado!='Respuentas Insuffientes (<10)'")
+    data_indicadores_min=df_min.groupby('Indicador')['Resultado'].min().reset_index()
+    data_indicadores_min.sort_values(by='Resultado',inplace=True)
     data_indicadores_min['Categoria']='Minimo'
+    data_indicadores_min=pd.merge(data_indicadores_min,df_min,how='left',on=['Indicador','Resultado'])
+    data_indicadores_min.drop(columns=['Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Tipo','Codificacion'],inplace=True)
+    data_indicadores_min=data_indicadores_min.head(10)
+    df_max=df_encuesta.query(f"Sector=='{option_1}' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indicador' & Resultado!='Respuentas Insuffientes (<10)'")
+    data_indicadores_max=df_max.groupby('Indicador')['Resultado'].max().reset_index()
+    data_indicadores_max.sort_values(by='Resultado',ascending=False,inplace=True)
     data_indicadores_max['Categoria']='Maximo'
+    data_indicadores_max=pd.merge(data_indicadores_max,df_max,how='left',on=['Indicador','Resultado'])
+    data_indicadores_max.drop(columns=['Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Tipo','Codificacion'],inplace=True)
+    data_indicadores_max=data_indicadores_max.head(10)
     data_indicadores_min_max=pd.concat([data_indicadores_min,data_indicadores_max])
     return data_indicadores_min_max
 
