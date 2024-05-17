@@ -575,7 +575,7 @@ df_indicadores_min_max=indicadores_min_max(option_1)
 # Crear una lista de colores basada en la paleta definida en category_colors
 colors = [categoria_colors[c] for c in df_indicadores_min_max['Categoria'].unique()]
 # Crear el gráfico con Plotly Express
-graf11 = px.bar(df_indicadores_min_max, y='Indicador', x='Resultado',  color_discrete_map=categoria_colors,title='<b>Servicios con mayor y menor resultado por indicador</b>') #color='Categoria',
+graf11 = px.bar(df_indicadores_min_max, y='Indicador', x='Resultado', color='Categoria' ,title='<b>Servicios con mayor y menor resultado por indicador</b>') #,
 
 # Personalizar el gráfico
 graf11.update_traces(marker_line_color='rgb(8,48,107)', marker_line_width=1.5, opacity=0.6)
