@@ -223,7 +223,7 @@ df_promedios_servicios_todos=pd.concat([df_promedios_servicios_todos, df_promedi
 # df_max_min['Row_number'] = np.where(df_max_min.reset_index().index==0,0,df_max_min.reset_index().index*0.5)-0.3
 # #df_max_min
 
-def min_max_servicio(option_1):
+def min_max_sector(option_1):
     indices=df_encuesta['Indice'].unique()
     Maximo=[]
     Minimo=[]
@@ -231,7 +231,7 @@ def min_max_servicio(option_1):
     Servicio_Minimo=[]
     Indice=[]
     for indice in indices:
-        datos_x_indice=df_encuesta.query(f"Sector!='{option_1}' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice' & Indice=='{indice}' & Resultado!='Respuentas Insuffientes (<10)'")
+        datos_x_indice=df_encuesta.query(f"Sector=='{option_1}' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice' & Indice=='{indice}' & Resultado!='Respuentas Insuffientes (<10)'")
         for i in range(datos_x_indice.shape[0]):
             if i==0:
                 ResultadoMaximo=datos_x_indice.iloc[i]['Resultado']
@@ -297,10 +297,10 @@ if option_1=='Todos' and option_2!='Todos':
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Servicio=='{option_2}'")
      
 if opcion_visualizacion=='Comparación entre máximos y mínimos' and option_1!='Todos':
-    df_max_min=min_max_servicio(option_1)
+    df_max_min=min_max_sector(option_1)
     paso=1
 else:
-    df_max_min=min_max_servicio(option_1)
+    df_max_min=min_max_sector(option_1)
     paso=2
 
 # with st.container():
