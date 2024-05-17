@@ -582,7 +582,7 @@ graf11 = px.bar(df_indicadores_min_max, x='Indicador', y='Resultado', color='Cat
 # graf11.update_traces(marker_line_color='rgb(8,48,107)', marker_line_width=1.5, opacity=0.6)
 
 graf11.update_layout(
-     xaxis=dict(title='', tickfont=dict(size=14),rotate=90),
+     xaxis=dict(title='', tickfont=dict(size=14)),
      yaxis=dict(title='Resultado', tickfont=dict(size=14)),
 #     legend=dict(font=dict(size=14)),
      title='',
@@ -594,17 +594,17 @@ graf11.update_layout(
 #     height=1000,  # Altura del gráfico en píxeles
  )
 
-# ## Agregar etiquetas
-x_shift = 100  # Variable para ajustar la posición vertical de las anotaciones
-# for index, row in df_indicadores_min_max.iterrows():
-graf11.add_annotation(
-         x=row['Row_number'], y=100, text=row['Servicio'],
-#         font=dict(size=14, color=categoria_colors[row['Categoria']]),
-#         showarrow=False,
-#         xshift=300,
-#         yshift=y_shift,  # Ajuste vertical
-    )
-x_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
+# # ## Agregar etiquetas
+# x_shift = 100  # Variable para ajustar la posición vertical de las anotaciones
+# # for index, row in df_indicadores_min_max.iterrows():
+# graf11.add_annotation(
+#          x=row['Row_number'], y=100, text=row['Servicio'],
+# #         font=dict(size=14, color=categoria_colors[row['Categoria']]),
+# #         showarrow=False,
+# #         xshift=300,
+# #         yshift=y_shift,  # Ajuste vertical
+#     )
+# x_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
 #---------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------
 
@@ -628,7 +628,7 @@ if opcion_visualizacion=='Comparación entre máximos y mínimos':
     #st.dataframe(df_indicadores_min_max)
 if opcion_visualizacion=='Comparación por sexo':
     st.plotly_chart(graf3)
-    #st.dataframe(df_indicadores_genero)
+    st.dataframe(df_indicadores_genero)
 if opcion_visualizacion=='Comparación por rango etario':
     st.plotly_chart(graf4)
     #st.dataframe(df_indicadores_rango_etario)
