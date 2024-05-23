@@ -103,11 +103,32 @@ df_todos=df_todos.drop(columns=columnas_drop)
 df_todos['Sector']='Administración Central'
 
 # Prpmedio todos los sectores x indice y genero
-df_indicadores_genero=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'")
-columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
-df_indicadores_genero=df_indicadores_genero.drop(columns=columnas_drop)
-df_indicadores_genero['Sector']='Administración Central'
-df_indicadores_genero.rename(columns={'Valor de la Caracteristica de Comparacion':'Genero'},inplace=True)
+# df_indicadores_genero=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'")
+# columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+# df_indicadores_genero=df_indicadores_genero.drop(columns=columnas_drop)
+# df_indicadores_genero['Sector']='Administración Central'
+# df_indicadores_genero.rename(columns={'Valor de la Caracteristica de Comparacion':'Genero'},inplace=True)
+
+
+def indice_genero (option_1,option_2):
+    if option_1 == 'Todos' and option_2=='Todos':
+        def_indicadores_genero=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'")
+        columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+        def_indicadores_genero=def_indicadores_genero.drop(columns=columnas_drop)
+        def_indicadores_genero['Sector']='Administración Central'
+    if option_1!='Todos' and option_2=='Todos':
+        def_indicadores_genero=df_encuesta.query(f"Sector=='{option_1}' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'").groupby('Indice')['Resultado'].mean().reset_index()
+        columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+        def_indicadores_genero=def_indicadores_genero.drop(columns=columnas_drop)
+        def_indicadores_genero['Sector']=option_1
+    if option_2!='Todos':
+        def_indicadores_genero=df_encuesta.query(f"Servicio=='{option_2}' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'").groupby('Indice')['Resultado'].mean().reset_index()
+        columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+        def_indicadores_genero=def_indicadores_genero.drop(columns=columnas_drop)
+        def_indicadores_genero['Sector']=option_2
+    def_indicadores_genero.rename(columns={'Valor de la Caracteristica de Comparacion':'Genero'},inplace=True)
+    return def_indicadores_genero
+
 
 
 # Prpmedio todos los sectores x indice y rango etario
@@ -277,6 +298,7 @@ if option_1!='Todos' and option_2=='Todos':
     df_promedios_todos=df_promedios_todos.query(f"Sector=='{option_1}'")
     df_promedios_todos=pd.concat([df_promedios_todos,df_todos])
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Sector=='{option_1}'")
+    
 
 if option_1!='Todos' and option_2!='Todos':
     version_grafico='version_2'
@@ -393,8 +415,14 @@ for index, row in df_max_min.iterrows():
     y_shift -= 0.01  # Cambio en la posición vertical para la próxima anotación
 #---------------------------------------------------------------------------------------
 # grafico 3
-
-graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y género en la administración central</b>',color='Genero', barmode='group',text='Resultado').\
+df_indicadores_genero= indice_genero(option_1,option_2)
+if option_1=='Todos' and option_2=='Todos':
+    txt_sector='Administración Central'
+if option_1!='Todos' and option_2=='Todos':
+    txt_sector=option_1
+if option_1!='Todos' and option_2!='Todos':
+    txt_sector=option_1+'-'+option_2
+graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y género en {txt_sector}</b>',color='Genero', barmode='group',text='Resultado').\
     update_yaxes(visible=visible_y_axis,title_text=None).\
                 update_xaxes(title_text=None)
 
