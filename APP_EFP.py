@@ -122,9 +122,10 @@ def indice_genero (option_1,option_2):
         #def_indicadores_genero=def_indicadores_genero.drop(columns=columnas_drop)
         def_indicadores_genero['Sector']=option_1
     if option_2!='Todos':
-        def_indicadores_genero=df_encuesta.query(f"Servicio=='{option_2}' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'").groupby(['Indice','Caracteristica de Comparacion'])['Resultado'].mean().reset_index()
-        #columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
-        #def_indicadores_genero=def_indicadores_genero.drop(columns=columnas_drop)
+        def_indicadores_genero=df_encuesta.query(f"Sector=='{option_1}' & Servicio=='{option_2}'  & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice' & Codificacion=='Indice' & Resultado!='Respuentas Insuffientes (<10)'")
+        #def_indicadores_genero=df_encuesta.query(f"Servicio=='{option_2}' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'").groupby(['Indice','Caracteristica de Comparacion'])['Resultado'].mean().reset_index()
+        columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
+        def_indicadores_genero=def_indicadores_genero.drop(columns=columnas_drop)
         def_indicadores_genero['Sector']=option_2
     def_indicadores_genero.rename(columns={'Valor de la Caracteristica de Comparacion':'Genero'},inplace=True)
     return def_indicadores_genero
