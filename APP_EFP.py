@@ -379,7 +379,8 @@ categoria_colors = {
 colors = [categoria_colors[c] for c in df_max_min['Categoria'].unique()]
 
 # Crear el gráfico con Plotly Express
-graf2 = px.bar(df_max_min, y='Indice', x='Resultado', color='Categoria', color_discrete_map=categoria_colors,title='<b>Servicios con mayor y menor resultado por indice</b>')
+graf2 = px.bar(df_max_min, y='Indice', x='Resultado', color='Categoria', color_discrete_map=categoria_colors,
+               title='<b>Servicios con mayor y menor resultado por indice</b>')
 
 # Personalizar el gráfico
 
@@ -437,7 +438,7 @@ graf3.update_layout(
     barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
-    width=1300,  # Ancho del gráfico en píxeles
+    width=1110,  # Ancho del gráfico en píxeles
     height=800,  # Altura del gráfico en píxeles
 )
 #---------------------------------------------------------------------------------------
@@ -455,7 +456,7 @@ graf4.update_layout(
     barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
-    width=1300,  # Ancho del gráfico en píxeles
+    width=1110,  # Ancho del gráfico en píxeles
     height=800,  # Altura del gráfico en píxeles
 )
 
@@ -475,7 +476,7 @@ graf5.update_layout(
     barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
-    width=1300,  # Ancho del gráfico en píxeles
+    width=1110,  # Ancho del gráfico en píxeles
     height=800,  # Altura del gráfico en píxeles
 )
 #---------------------------------------------------------------------------------------
@@ -494,7 +495,7 @@ graf6.update_layout(
     barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
-    width=1300,  # Ancho del gráfico en píxeles
+    width=1110,  # Ancho del gráfico en píxeles
     height=800,  # Altura del gráfico en píxeles
 )
 
@@ -514,7 +515,7 @@ graf7.update_layout(
     barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
-    width=1300,  # Ancho del gráfico en píxeles
+    width=1110,  # Ancho del gráfico en píxeles
     height=800,  # Altura del gráfico en píxeles
 )
 #---------------------------------------------------------------------------------------
@@ -533,7 +534,7 @@ graf8.update_layout(
     barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
-    width=1300,  # Ancho del gráfico en píxeles
+    width=1110,  # Ancho del gráfico en píxeles
     height=800,  # Altura del gráfico en píxeles
 )
 #---------------------------------------------------------------------------------------
@@ -552,7 +553,7 @@ graf9.update_layout(
     barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
-    width=1300,  # Ancho del gráfico en píxeles
+    width=1110,  # Ancho del gráfico en píxeles
     height=800,  # Altura del gráfico en píxeles
 )
 #---------------------------------------------------------------------------------------
@@ -571,7 +572,7 @@ graf10.update_layout(
     barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
-    width=1300,  # Ancho del gráfico en píxeles
+    width=1110,  # Ancho del gráfico en píxeles
     height=800,  # Altura del gráfico en píxeles
 )
 
@@ -596,8 +597,8 @@ graf11.update_layout(
 #     barmode='group',
 #     bargap=0.15,
 #     bargroupgap=0.1,
-     width=1400,  # Ancho del gráfico en píxeles
-     height=1000,  # Altura del gráfico en píxeles
+     width=11100,  # Ancho del gráfico en píxeles
+     height=800,  # Altura del gráfico en píxeles
  )
 
 # # ## Agregar etiquetas
