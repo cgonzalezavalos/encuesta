@@ -387,7 +387,8 @@ graf2 = px.bar(df_max_min, y='Indice', x='Resultado', color='Categoria', color_d
 
 graf2.update_layout(
     yaxis=dict(title='', tickfont=dict(size=14)),
-    xaxis=dict(title='Resultado', tickfont=dict(size=14)),
+    #xaxis=dict(title='Resultado', tickfont=dict(size=14)),
+    xaxis=dict(title='', tickfont=dict(size=14)),
     legend=dict(font=dict(size=14)),
     title='',
     showlegend=True,
