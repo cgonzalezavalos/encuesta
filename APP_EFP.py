@@ -423,9 +423,10 @@ if option_1!='Todos' and option_2=='Todos':
     txt_sector=option_1
 if option_1!='Todos' and option_2!='Todos':
     txt_sector=option_1+'-'+option_2
-graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y género en {txt_sector}</b>',color='Genero', barmode='group',text='Resultado').\
+graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y género en {txt_sector}</b>', barmode='group',text='Resultado').\
     update_yaxes(visible=visible_y_axis,title_text=None).\
                 update_xaxes(title_text=None)
+#,color='Genero'
 
 graf3.update_layout(
     yaxis=dict(title='', tickfont=dict(size=14)),
