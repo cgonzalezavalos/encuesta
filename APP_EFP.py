@@ -118,12 +118,9 @@ def indice_genero (option_1,option_2):
         def_indicadores_genero['Sector']='Administración Central'
     if option_1!='Todos' and option_2=='Todos':
         def_indicadores_genero=df_encuesta.query(f"Sector=='{option_1}' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'").groupby(['Indice','Caracteristica de Comparacion'])['Resultado'].mean().reset_index()
-        #columnas_drop={'Caracteristica de Comparacion'}#,'Indicador','Codificacion','Servicio','Tipo'}
-        #def_indicadores_genero=def_indicadores_genero.drop(columns=columnas_drop)
         def_indicadores_genero['Sector']=option_1
     if option_2!='Todos':
         def_indicadores_genero=df_encuesta.query(f"Sector=='{option_1}' & Servicio=='{option_2}'  & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice' & Codificacion=='Indice' & Resultado!='Respuentas Insuffientes (<10)'")
-        #def_indicadores_genero=df_encuesta.query(f"Servicio=='{option_2}' & `Caracteristica de Comparacion`=='Genero' & Tipo=='Indice'").groupby(['Indice','Caracteristica de Comparacion'])['Resultado'].mean().reset_index()
         columnas_drop={'Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
         def_indicadores_genero=def_indicadores_genero.drop(columns=columnas_drop)
         def_indicadores_genero['Sector']=option_2
@@ -425,7 +422,8 @@ if option_1!='Todos' and option_2=='Todos':
     txt_sector=option_1
 if option_1!='Todos' and option_2!='Todos':
     txt_sector=option_1+'-'+option_2
-graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y género en {txt_sector}</b>', barmode='group',text='Resultado').\
+graf3=px.bar(df_indicadores_genero,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y género en {txt_sector}</b>',
+              barmode='group',text='Resultado').\
     update_yaxes(visible=visible_y_axis,title_text=None).\
                 update_xaxes(title_text=None)
 #,color='Genero'
@@ -444,7 +442,9 @@ graf3.update_layout(
 #---------------------------------------------------------------------------------------
 # grafico 4
 
-graf4=px.bar(df_indicadores_rango_etario,x='Indice',y='Resultado',title=f'<b>Comparación de resultados por indices y rango etario en la administración central</b>',color='Rango Etario', barmode='group',text='Resultado').\
+graf4=px.bar(df_indicadores_rango_etario,x='Indice',y='Resultado',
+                title=f'<b>Comparación de resultados por indices y rango etario en la administración central</b>',
+                    color='Rango Etario', barmode='group',text='Resultado').\
     update_yaxes(visible=visible_y_axis,title_text=None).\
                 update_xaxes(title_text=None)
 
