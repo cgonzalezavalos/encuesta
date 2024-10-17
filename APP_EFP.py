@@ -317,12 +317,12 @@ if option_1=='Todos' and option_2!='Todos':
     version_grafico='version_2'
     df_promedios_servicios_todos=df_promedios_servicios_todos.query(f"Servicio=='{option_2}'")
 # comentado el 17102024-------------------------------    
-# if opcion_visualizacion=='Comparación entre máximos y mínimos' and option_1!='Todos':
-#     df_max_min=min_max_sector(option_1)
-#     paso=1
-# else:
-#     df_max_min=min_max_sector(option_1)
-#     paso=2
+if opcion_visualizacion=='Comparación entre máximos y mínimos' and option_1!='Todos':
+    df_max_min=min_max_sector(option_1)
+    #paso=1
+else:
+    df_max_min=min_max_sector(option_1)
+    #paso=2
 # comentado el 17102024------------------------------
 # with st.container():
 #     col1,col2,col3=st.columns(3)
