@@ -48,16 +48,23 @@ def datos_encuesta():
     df=pd.merge(df,mt_servicios,how='left',on='Servicio')
     df=df[df['Resultado']!='Respuentas Insuffientes (<10)']
     return df
-
-
 df_encuesta=datos_encuesta()
+
 
 @st.cache_data
 def maestro_servicios():
     mt_servicios=pd.read_excel('Maestros.xlsx',sheet_name='servicios')
     return mt_servicios
-
 df_mt_servicios=maestro_servicios()
+
+
+@st.cache_data
+def atributos_organismos():
+    mt_atributos=pd.read_excel('ENFP_panel.xlsx',sheet_name='atributos')
+    # mt_atributos=mt_atributos.query("'ENFP 2023'=='Si'")
+    return mt_atributos
+df_mt_atributos=atributos_organismos()
+
 #-------------------------------------------------------------------------
 # Función para seleccionar servicios segun ministerio seleccionado
 def select_servicio(df_encuesta, option_1):
