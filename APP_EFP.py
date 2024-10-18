@@ -232,11 +232,12 @@ def min_max_sector(option_1):
                 ResultadoMaximo=datos_x_indice.iloc[i]['Resultado']
                 ServicioMaximo=datos_x_indice.iloc[i]['Servicio']
                 ResultadoMinimo=datos_x_indice.iloc[i]['Resultado']
+                ServicioMinimo=datos_x_indice.iloc[i]['Servicio']
             else:
                 if datos_x_indice.iloc[i]['Resultado']>ResultadoMaximo:
                     ResultadoMaximo=datos_x_indice.iloc[i]['Resultado']
                     ServicioMaximo=datos_x_indice.iloc[i]['Servicio']
-                if datos_x_indice.iloc[i]['Resultado']<ResultadoMinimo:
+                if datos_x_indice.iloc[i]['Resultado']<=ResultadoMinimo:
                     ResultadoMinimo=datos_x_indice.iloc[i]['Resultado']
                     ServicioMinimo=datos_x_indice.iloc[i]['Servicio']
         Maximo.append(ResultadoMaximo)
