@@ -359,7 +359,14 @@ graf1.update_layout(
     yaxis=dict(title='', tickfont=dict(size=14)),
     xaxis=dict(title='Resultado', tickfont=dict(size=14)),
     yaxis_tickformat='.0f',
-    legend=dict(font=dict(size=14)),
+    legend=dict(
+        font=dict(size=14),
+        orientation='h',  # Leyenda en orientación horizontal
+        yanchor='bottom',  # Ancla en la parte inferior
+        y=-0.2,  # Coloca la leyenda debajo del gráfico (ajusta si es necesario)
+        xanchor='center',  # Centra la leyenda
+        x=0.5  # Centra horizontalmente
+    ),
     title='',
     showlegend=True,
     barmode='group',
