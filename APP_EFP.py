@@ -359,7 +359,12 @@ if version_grafico=='version_3':
 #    height=800,)
 
 graf1.update_layout(
-    yaxis=dict(title='', tickfont=dict(size=14,tickformat='.0f')),
+    # yaxis=dict(title='', tickfont=dict(size=14,tickformat='.0f')),
+    yaxis=dict(
+        title='', 
+        tickfont=dict(size=14),
+        tickformat='.0f'  # Colocado correctamente dentro de yaxis
+    ),
     xaxis=dict(title='Resultado', tickfont=dict(size=14)),
     legend=dict(
         font=dict(size=14),
