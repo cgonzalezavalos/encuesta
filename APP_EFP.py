@@ -202,7 +202,7 @@ df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
 df_promedios_todos['Resultado'] = pd.to_numeric(df_promedios_todos['Resultado'], errors='coerce')
 df_promedios_todos['Resultado']=np.round(df_promedios_todos['Resultado'],0)
 
-st.dataframe(df_promedios_todos)
+#st.dataframe(df_promedios_todos)
 
 #-------------------------------------------------------------------------
 #Promedios por Servicio
