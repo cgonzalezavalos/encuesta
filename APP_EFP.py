@@ -371,7 +371,7 @@ graf1.update_layout(
     ),
     title='',
     showlegend=True,
-    # barmode='group',
+    barmode='group',
     bargap=0.15,
     bargroupgap=0.1,
     width=1110,  # Ancho del gráfico en píxeles
