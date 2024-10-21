@@ -363,7 +363,7 @@ graf1.update_layout(
         font=dict(size=14),
         orientation='h',  # Leyenda en orientación horizontal
         yanchor='bottom',  # Ancla en la parte inferior
-        y=-0.2,  # Coloca la leyenda debajo del gráfico (ajusta si es necesario)
+        y=-0.5,  # Coloca la leyenda debajo del gráfico 
         xanchor='center',  # Centra la leyenda
         x=0.5  # Centra horizontalmente
     ),
