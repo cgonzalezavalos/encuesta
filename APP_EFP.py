@@ -198,7 +198,7 @@ df_promedios_todos.reset_index(drop=True, inplace=True)
 columnas_drop={'Caracteristica de Comparacion','Valor de la Caracteristica de Comparacion','Indicador','Codificacion','Servicio','Tipo'}
 df_promedios=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparacion`=='Todos' & Tipo=='Indice'").drop(columns=columnas_drop)
 df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
-#df_promedios_todos['Resultado']=np.round(df_promedios_todos['Resultado'],2)
+df_promedios_todos['Resultado']=np.round(df_promedios_todos['Resultado'],0)
 
 st.dataframe(df_promedios_todos)
 
