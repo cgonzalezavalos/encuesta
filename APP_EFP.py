@@ -200,6 +200,8 @@ df_promedios=df_encuesta.query("Servicio=='Todos' & `Caracteristica de Comparaci
 df_promedios_todos=pd.concat([df_promedios_todos, df_promedios])
 #df_promedios_todos['Resultado']=np.round(df_promedios_todos['Resultado'],2)
 
+st.dataframe(df_promedios_todos)
+
 #-------------------------------------------------------------------------
 #Promedios por Servicio
 Servicios = df_encuesta[df_encuesta['Servicio'] != 'Todos']['Servicio'].unique()
@@ -343,7 +345,6 @@ if version_grafico=='version_1':
         update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
 if version_grafico=='version_2':
-    # graf1=px.bar(df_promedios_servicios_todos,x='Indice',y='Resultado',title=f'<b>Resultados {option_2} por Indices</b>',color_discrete_map=dimension_colors).\
     graf1=px.bar(df_promedios_todos.sort_values(by='Sector'),x='Indice',y='Resultado',
                  title=f'<b>Comparación de resultados por indices entre todos los sectores y {option_1}</b>',color='Sector', barmode='group',text='Resultado').\
         update_yaxes(visible=visible_y_axis,title_text=None).\
@@ -353,17 +354,13 @@ if version_grafico=='version_3':
                  title=f'<b>Comparación de resultados por indices entre todos los sectores y {option_1}</b>',color='Sector', barmode='group',text='Resultado').\
         update_yaxes(visible=visible_y_axis,title_text=None).\
                  update_xaxes(title_text=None)
-    #,color='Sector', barmode='group'
 
-#graf1.update_layout(yaxis_tickformat='.0f',width=1300,  # Ancho del gráfico en píxeles
-#    height=800,)
 
 graf1.update_layout(
-    # yaxis=dict(title='', tickfont=dict(size=14,tickformat='.0f')),
     yaxis=dict(
         title='', 
         tickfont=dict(size=14),
-        tickformat='.0f'  # Colocado correctamente dentro de yaxis
+        tickformat='.0f' 
     ),
     xaxis=dict(title='Resultado', tickfont=dict(size=14)),
     legend=dict(
@@ -383,8 +380,6 @@ graf1.update_layout(
     height=800,  # Altura del gráfico en píxeles
 )
 
-# Mostrar los valores sobre las barras
-#graf1.update_traces(text=graf1.data[0]['y'], texttemplate='%{text:.0f}', textposition='outside')
 
 
 #---------------------------------------------------------------------------------------
